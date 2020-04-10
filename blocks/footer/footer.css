@@ -1,0 +1,18 @@
+@import url(./__copirights/footer__copirights.css);
+
+.footer {
+    display: flex;
+}
+
+@media screen and (max-width: 882px) {
+    .footer {
+        margin-left: calc((100vw - 582px) / 2);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .footer {
+        margin-left: calc((100vw - 282px) / 2);
+    }
+}
+

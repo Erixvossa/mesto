@@ -13,9 +13,21 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 882px) {
     .profile {
         flex-direction: column;
         margin-bottom: 36px;
     }
 }
+/*
+@media screen and (max-width: 882px) {
+    .profile {
+        margin-left: calc((100vw - 582px) / 2);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .profile {
+        margin-left: calc((100vw - 282px) / 2);
+    }
+}*/
