@@ -3,9 +3,15 @@
     margin-left: auto;
 }
 
+.profile__add-button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
 @media screen and (max-width: 882px) {
     .profile__add-button {
         margin-left: initial;
         margin-top: 36px;
     }
 }
+

@@ -1,0 +1,16 @@
+.popub__button-close {
+    position: absolute;
+    top: -45px;
+    right: -45px;
+}
+
+.popub__button-close:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+    .popub__button-close {
+        right: -14px;
+    }
+}
