@@ -6,8 +6,7 @@ let closeButton = document.querySelector('.popub__button-close');
 
 popubButton.addEventListener('click', function () {
     popup.classList.add('popup_opened');
-    let popupName = document.querySelector('.popup__name');
-    popupName.value = pageNameValue;
+    document.querySelector('.popup__name').value = document.querySelector('.profile-info__title').textContent;
     document.querySelector('.popup__subname').value = document.querySelector('.profile-info__subtitle').textContent;
 });
 
@@ -16,9 +15,6 @@ closeButton.addEventListener('click', function () {
 });
 
 let profileInfoTitle = document.querySelector('.profile-info__title');
-
-let pageNameValue = profileInfoTitle.textContent;
-
 
 
 
