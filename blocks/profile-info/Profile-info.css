@@ -3,7 +3,6 @@
 @import url(../profile-info/__subtitle/profile-info__subtitle.css);
 @import url(../profile-info/__edit-button/profile-info__edit-button.css);
 
-
 .profile-info {
     display: flex;
     flex-direction: column;
