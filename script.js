@@ -1,20 +1,20 @@
 let popup = document.querySelector('.popup');
-let popubButton = document.querySelector('.profile-info__edit-button');
+let popubButton = document.querySelector('.profilee-info__edit-button');
 let closeButton = document.querySelector('.popub__button-close');
 
 
 
 popubButton.addEventListener('click', function () {
     popup.classList.add('popup_opened');
-    document.querySelector('.popup__name').value = document.querySelector('.profile-info__title').textContent;
-    document.querySelector('.popup__subname').value = document.querySelector('.profile-info__subtitle').textContent;
+    document.querySelector('.popup__name').value = document.querySelector('.profilee-info__title').textContent;
+    document.querySelector('.popup__subname').value = document.querySelector('.profilee-info__subtitle').textContent;
 });
 
 closeButton.addEventListener('click', function () {
     popup.classList.remove('popup_opened');
 });
 
-let profileInfoTitle = document.querySelector('.profile-info__title');
+let profileInfoTitle = document.querySelector('.profilee-info__title');
 
 
 
@@ -38,8 +38,8 @@ function formSubmitHandler (evt) {
 
     // Вставьте новые значения с помощью textContent
 
-    document.querySelector('.profile-info__title').textContent = nameInput;
-    document.querySelector('.profile-info__subtitle').textContent = jobInput;
+    document.querySelector('.profilee-info__title').textContent = nameInput;
+    document.querySelector('.profilee-info__subtitle').textContent = jobInput;
     popup.classList.remove('popup_opened');
 }
 
