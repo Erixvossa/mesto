@@ -1,0 +1,16 @@
+@import url(../profilee-info/__centering/profile-info__centering.css);
+@import url(../profilee-info/__title/profile-info__title.css);
+@import url(../profilee-info/__subtitle/profile-info__subtitle.css);
+@import url(../profilee-info/__edit-button/profile-info__edit-button.css);
+
+.profilee-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+@media screen and (max-width: 882px) {
+    .profilee-info {
+        margin-left: initial;
+    }
+}

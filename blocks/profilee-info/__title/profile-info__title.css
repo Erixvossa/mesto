@@ -1,4 +1,4 @@
-.profile-info__title {
+.profilee-info__title {
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 882px) {
-    .profile-info__title {
+    .profilee-info__title {
     font-size: 27px;
     line-height: 56px;
     margin-right: 1px;
