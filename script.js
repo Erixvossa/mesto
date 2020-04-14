@@ -5,13 +5,13 @@ let closeButton = document.querySelector('.popub__button-close');
 
 
 popubButton.addEventListener('click', function () {
-    popup.classList.add('popup_opened');
-    document.querySelector('.popup__name').value = document.querySelector('.profilee-info__title').textContent;
-    document.querySelector('.popup__subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+    popup.classList.add('popup_type_opened');
+    document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
+    document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
 });
 
 closeButton.addEventListener('click', function () {
-    popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_type_opened');
 });
 
 let profileInfoTitle = document.querySelector('.profilee-info__title');
@@ -29,8 +29,8 @@ function formSubmitHandler (evt) {
                                                 // О том, как это делать, расскажем позже.
 
     // Находим поля формы в DOM
-    let nameInput = formElement.querySelector('.popup__name').value;
-    let jobInput = formElement.querySelector('.popup__subname').value;
+    let nameInput = formElement.querySelector('.popup__input_type_name').value;
+    let jobInput = formElement.querySelector('.popup__input_type_subname').value;
 
     // Получите значение полей из свойства value
 
@@ -40,7 +40,7 @@ function formSubmitHandler (evt) {
 
     document.querySelector('.profilee-info__title').textContent = nameInput;
     document.querySelector('.profilee-info__subtitle').textContent = jobInput;
-    popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_type_opened');
 }
 
 // Прикрепляем обработчик к форме:

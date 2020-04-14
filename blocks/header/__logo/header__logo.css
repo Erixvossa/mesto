@@ -1,5 +1,6 @@
 .header__logo {
     display: flex;
+    margin-bottom: 40px;
 }
 
 @media screen and (max-width: 882px) {
@@ -11,5 +12,6 @@
 @media screen and (max-width: 580px) {
     .header__logo {
         margin-left: calc((100vw - 282px) / 2);
+        margin-bottom: 32px;
     }
 }

@@ -13,7 +13,5 @@
     height: 18px;
     background-color: white;
     background-size: contain;
-    position: absolute;
-    bottom: 30px;
-    right: 22px;
+    margin-right: 22px;
 }
