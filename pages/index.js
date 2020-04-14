@@ -1,25 +1,27 @@
-let popup = document.querySelector('.popup');
-let popubButton = document.querySelector('.profilee-info__edit-button');
-let closeButton = document.querySelector('.popub__button-close');
-
-
-
-popubButton.addEventListener('click', function () {
-    popup.classList.add('popup_type_opened');
-    document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
-    document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
-});
-
-closeButton.addEventListener('click', function () {
-    popup.classList.remove('popup_type_opened');
-});
-
+const popup = document.querySelector('.popup');
+const popubButton = document.querySelector('.profilee-info__edit-button');
+const closeButton = document.querySelector('.popub__button-close');
 let profileInfoTitle = document.querySelector('.profilee-info__title');
-
-
 
 // Находим форму в DOM
 let formElement = document.querySelector('form');
+
+function openPopup () {
+    popup.classList.add('popup_type_opened');
+    document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
+    document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+}
+
+function closePopup () {
+    popup.classList.remove('popup_type_opened');
+}
+
+popubButton.addEventListener('click', openPopup);
+
+closeButton.addEventListener('click', closePopup);
+
+
+
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -40,9 +42,12 @@ function formSubmitHandler (evt) {
 
     document.querySelector('.profilee-info__title').textContent = nameInput;
     document.querySelector('.profilee-info__subtitle').textContent = jobInput;
-    popup.classList.remove('popup_type_opened');
+    closePopup ();
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+
