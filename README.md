@@ -1,5 +1,7 @@
 # Проект 4: Место
 
+gitpages src: https://erixvossa.github.io/mesto/
+
 ### Обзор
 
 * Базовый код JS

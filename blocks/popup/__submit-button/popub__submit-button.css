@@ -5,6 +5,14 @@
     background: #000000;
     border-radius: 2px;
     border-width: inherit;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    height: 50px;
 }
 
 .popub__submit-button:hover {

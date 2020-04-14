@@ -1,4 +1,18 @@
 .element__like {
+    align-self: center;
+    margin-left: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background-image: url(../../../images/element__like.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 21px;
+    height: 18px;
+    background-color: white;
+    background-size: contain;
     position: absolute;
     bottom: 30px;
     right: 22px;
