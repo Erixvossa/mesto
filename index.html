@@ -21,18 +21,18 @@
             <div class="profilee-info">
                 <div class="profilee-info__centering">
                     <h1 class="profilee-info__title">Жак-Ив Кусто</h1>
-                    <button class="profilee-info__edit-button"></button>
+                    <button class="profilee-info__edit-button" type="button"></button>
                 </div>
                 <p class="profilee-info__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"></button>
+            <button class="profile__add-button" type="button"></button>
         </nav>
         <section class="elements">
             <div class="element">
                 <img class="element__photo" src="./images/kirill-pershin-1088404-unsplash.png" alt="фото Карачаевск">
                 <div class="element__title-like-string">
                     <h2 class="element__title">Карачаевск</h2>
-                    <button class="element__like"></button>
+                    <button class="element__like" type="button"></button>
                 </div>
             </div>
             <div class="element">
@@ -77,12 +77,12 @@
         </footer>
     </div>
     <div class="popup popup_type_closed">
-        <form class="popup__container">
-            <img class="popub__button-close" src="./images/popup__close-button.svg" alt="close form button">
+        <form class="popup__container" name="popup-form" method="GET" action="#">
+            <button class="popub__button-close" type="reset"></button>
             <p class="popup__title">Редактировать профиль</p>
-            <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="Жак">
+            <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name" required>
             <input class="popup__input popup__input_type_subname" type="text" placeholder="Профессия" name="subname">
-            <button class="popub__submit-button">Сохранить</button>
+            <button class="popub__submit-button" type="submit">Сохранить</button>
         </form>
             
     </div>

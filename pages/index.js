@@ -6,19 +6,36 @@ let profileInfoTitle = document.querySelector('.profilee-info__title');
 // Находим форму в DOM
 let formElement = document.querySelector('form');
 
-function openPopup () {
-    popup.classList.add('popup_type_opened');
-    document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
-    document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+
+// Функция открытия попапа без условий
+//function openPopup () {
+//    popup.classList.add('popup_type_opened');
+//    document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
+//    document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+//}
+
+// Функция закрытия попапа без условий
+//function closePopup () {
+//    popup.classList.remove('popup_type_opened');
+//}
+
+
+// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
+function openClosePopup () {
+    if (popup.classList.contains('popup_type_opened')) {
+        popup.classList.remove('popup_type_opened');
+    }
+    else {
+        popup.classList.add('popup_type_opened');
+        document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
+        document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+    }
 }
 
-function closePopup () {
-    popup.classList.remove('popup_type_opened');
-}
 
-popubButton.addEventListener('click', openPopup);
+popubButton.addEventListener('click', openClosePopup);
 
-closeButton.addEventListener('click', closePopup);
+closeButton.addEventListener('click', openClosePopup);
 
 
 
@@ -42,7 +59,7 @@ function formSubmitHandler (evt) {
 
     document.querySelector('.profilee-info__title').textContent = nameInput;
     document.querySelector('.profilee-info__subtitle').textContent = jobInput;
-    closePopup ();
+    openClosePopup ();
 }
 
 // Прикрепляем обработчик к форме:

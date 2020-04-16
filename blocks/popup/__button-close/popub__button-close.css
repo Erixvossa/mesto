@@ -1,7 +1,19 @@
 .popub__button-close {
     position: absolute;
-    top: -45px;
-    right: -45px;
+    top: -40px;
+    right: -41px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 0;
+    align-self: center;
+    background-image: url(../../../images/popup__close-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0);
+    width: 45px;
+    height: 45px;
 }
 
 .popub__button-close:hover {
@@ -9,8 +21,8 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
     .popub__button-close {
-        right: -14px;
+        right: -7px;
     }
 }

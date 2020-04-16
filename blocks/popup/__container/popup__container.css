@@ -1,7 +1,6 @@
 .popup__container {
     width: 100%;
     max-width: 430px;
-    height: 330px;
     background-color: white;
     position: absolute;
     top: calc((100vh - 330px) / 2);
