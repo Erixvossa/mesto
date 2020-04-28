@@ -96,15 +96,25 @@ const initialCards = [
 
 
 
-const elementTemplate = document.querySelector('#element').content;
-const elementsContainer = document.querySelector('.elements');
-const elementShow = elementTemplate.cloneNode(true);
-
-elementShow.querySelector('.element__title').textContent = initialCards[0].name;
-elementShow.querySelector('.element__photo').src = initialCards[0].link;
-
-elementsContainer.append(elementShow);
 
 
 
+function createElement (elementTitle, elementLink) {
+    const elementTemplate = document.querySelector('#element').content;
+    const elementsContainer = document.querySelector('.elements');
+    const elementShow = elementTemplate.cloneNode(true);
+    
+    elementShow.querySelector('.element__title').textContent = elementTitle;
+    elementShow.querySelector('.element__photo').src = elementLink;
 
+    elementsContainer.append(elementShow);
+}
+
+
+for (let i = 0; i < initialCards.length; i++ ) {
+    let elementTitleCounter = initialCards[i].name;
+    let elementSrcCounter = initialCards[i].link;
+    createElement (initialCards[i].name, initialCards[i].link);
+}
+
+createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
