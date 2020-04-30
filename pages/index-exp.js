@@ -14,56 +14,6 @@ let popupInputSubname = document.querySelector('.popup__input_type_subname');
 // Находим форму в DOM
 let formElement = document.querySelector('form');
 
-let popupType = '';
-
-
-// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
-function openClosePopup () {
-    if (popup.classList.contains('popup_type_opened')) {
-        popup.classList.remove('popup_type_opened');
-    }
-    else {
-        popup.classList.add('popup_type_opened');
-        document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
-        document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
-        popupType = 'author'; // экспериментальная часть
-    }
-}
-
-
-popubButton.addEventListener('click', openClosePopup);
-
-closeButton.addEventListener('click', openClosePopup);
-
-
-
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Находим поля формы в DOM
-    let nameInput = formElement.querySelector('.popup__input_type_name').value;
-    let jobInput = formElement.querySelector('.popup__input_type_subname').value;
-    // Получите значение полей из свойства value
-    // Выберите элементы, куда должны быть вставлены значения полей
-    
-    // Вставьте новые значения с помощью textContent
-    document.querySelector('.profilee-info__title').textContent = nameInput;
-    document.querySelector('.profilee-info__subtitle').textContent = jobInput;
-    openClosePopup ();
-}
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-//formElement.addEventListener('submit', formSubmitHandler);
-
-
-
-
 
 const initialCards = [
     {
@@ -93,6 +43,48 @@ const initialCards = [
 ];
 
 
+// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
+function openClosePopup () {
+    if (popup.classList.contains('popup_type_opened')) {
+        popup.classList.remove('popup_type_opened');
+    }
+    else {
+        popup.classList.add('popup_type_opened');
+        document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
+        document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
+    }
+}
+
+
+popubButton.addEventListener('click', openClosePopup);
+
+closeButton.addEventListener('click', openClosePopup);
+
+
+
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function formSubmitHandler (evt) {
+    //evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    // Так мы можем определить свою логику отправки.
+    // О том, как это делать, расскажем позже.
+
+    // Находим поля формы в DOM
+    let nameInput = formElement.querySelector('.popup__input_type_name').value;
+    let jobInput = formElement.querySelector('.popup__input_type_subname').value;
+    // Получите значение полей из свойства value
+    // Выберите элементы, куда должны быть вставлены значения полей
+    
+    // Вставьте новые значения с помощью textContent
+    document.querySelector('.profilee-info__title').textContent = nameInput;
+    document.querySelector('.profilee-info__subtitle').textContent = jobInput;
+    openClosePopup ();
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+//formElement.addEventListener('submit', formSubmitHandler);
 
 
 
@@ -116,10 +108,8 @@ function createElement (elementTitle, elementLink) {
         // button, на который мы кликнули
     
         const eventTarget = evt.target;
-        console.log(eventTarget);
         eventTarget.classList.toggle('element__like_set');
     });
-
 
 
     //находим кнопку recycle
@@ -130,7 +120,6 @@ function createElement (elementTitle, elementLink) {
     //создаем слушатель событий на кнопку recycleButton, который будет удалять currentElementRecycle
     recycleButton.addEventListener('click', function (evt) {
         const currentElement = evt.target;
-        console.log(currentElement);
         currentElementRecycle.remove();
     })
 
@@ -154,23 +143,23 @@ const addElementButton = document.querySelector('.profile__add-button');
 addElementButton.addEventListener('click', openCloseAddElement);
 
 function openCloseAddElement () {
-    document.querySelector('.popup__title').textContent = 'Новое место'
-    document.querySelector('.popub__submit-button').textContent = 'Создать место'
+    document.querySelector('.popup__title').textContent = 'Новое место';
+    document.querySelector('.popub__submit-button').textContent = 'Создать место';
     if (popup.classList.contains('popup_type_opened')) {
         popup.classList.remove('popup_type_opened');
     }
     else {
         popup.classList.add('popup_type_opened');
-        popupInputName.placeholder = "Название"
+        popupInputName.placeholder = "Название";
         popupInputName.value = '';
-        popupInputSubname.placeholder = "Ссылка на картинку"
+        popupInputSubname.placeholder = "Ссылка на картинку";
         popupInputSubname.value = '';
         popupType = 'addElement'; // экспериментальная часть
     }
 }
 
-function addElementHandler (evt) {
-    evt.preventDefault(); 
+function addElementHandler () {
+
     // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
     // О том, как это делать, расскажем позже.
@@ -184,16 +173,14 @@ function addElementHandler (evt) {
     openCloseAddElement ();
 }
 
-function chooseHandler (evt) {
+
+formElement.addEventListener('submit', function(evt) {
     evt.preventDefault(); 
-    if (popupType = 'author') {
-        formSubmitHandler ();
-    }
-    else {
+    if (document.querySelector('.popub__submit-button').textContent = 'Создать место') {
+        console.log('новое место');
         addElementHandler ();
     }
-}
-
-formElement.addEventListener('submit', chooseHandler);
-
-console.log (popupType);
+    else {
+        formSubmitHandler ();
+    }
+});

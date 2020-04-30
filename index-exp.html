@@ -45,6 +45,17 @@
         </form>
     </div>
 
+    <template id='popup'>
+        <div class="popup popup_type_closed">
+            <form class="popup__container" name="popup-form" method="GET" action="#">
+                <button class="popub__button-close" type="reset"></button>
+                <p class="popup__title"></p>
+                <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name" required>
+                <input class="popup__input popup__input_type_subname" type="text" placeholder="Профессия" name="subname">
+                <button class="popub__submit-button" type="submit"></button>
+            </form>
+        </div>
+    </template>
 
     
     <template id='element'>
@@ -57,13 +68,8 @@
                 
             </div>
     </template>
-<script src="./pages/index.js"></script>
+<script src="./pages/index-exp.js"></script>
 </body>
 
 </html>
 
-<!--
-    Вопрос:
-    1) Про какой функционал в ревью "Надо исправить" идет речь? "Указанный в проектной работе функционал должен работаеть"
-    2) В какой папке необходимо хранить JS? В описании проектной работы и теории этого не нашел. В данный момент из логических
-соображений создал index.js и переместил в pages-->
