@@ -107,14 +107,50 @@ function createElement (elementTitle, elementLink) {
     elementShow.querySelector('.element__title').textContent = elementTitle;
     elementShow.querySelector('.element__photo').src = elementLink;
 
-    elementsContainer.append(elementShow);
+    elementsContainer.prepend(elementShow);
+
+    let likeButton = document.querySelector('.element__like');
+
+    likeButton.addEventListener('click', function (evt) {
+        // в переменной eventTarget окажется элемент
+        // button, на который мы кликнули
+    
+        const eventTarget = evt.target;
+        console.log(eventTarget);
+        eventTarget.classList.toggle('element__like_set');
+    });
+    
+    
+
+
 }
 
 
-for (let i = 0; i < initialCards.length; i++ ) {
+
+
+for (let i = initialCards.length - 1; i >= 0; i--) {
     let elementTitleCounter = initialCards[i].name;
     let elementSrcCounter = initialCards[i].link;
     createElement (initialCards[i].name, initialCards[i].link);
 }
 
-createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
+    createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
+
+
+
+
+//function setLike () {
+//    if (likeButton.classList.contains('element__like_set')) {
+ //       likeButton.classList.remove('element__like_set');
+ //   }
+ //   else {
+ //       likeButton.classList.add('element__like_set');
+ //   }
+//}
+
+//document.querySelector('.element__like').addEventListener('click', function (evt) {
+    //evt.target.classList.toggle('element__like_set');
+    //const eventTarget = evt.target;
+    //setLike (eventTarget);
+    //console.log(eventTarget);
+//});

@@ -15,3 +15,12 @@
     background-size: contain;
     margin-right: 22px;
 }
+
+.element__like:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.element__like_set {
+    background-image: url(../../../images/element__like_black.svg);
+}
