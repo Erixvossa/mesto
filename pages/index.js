@@ -104,12 +104,14 @@ function createElement (elementTitle, elementLink) {
     const elementsContainer = document.querySelector('.elements');
     const elementShow = elementTemplate.cloneNode(true);
     
+    
     elementShow.querySelector('.element__title').textContent = elementTitle;
     elementShow.querySelector('.element__photo').src = elementLink;
 
     elementsContainer.prepend(elementShow);
 
-    let likeButton = document.querySelector('.element__like');
+    //находим кнопку like
+    const likeButton = document.querySelector('.element__like');
 
     likeButton.addEventListener('click', function (evt) {
         // в переменной eventTarget окажется элемент
@@ -119,14 +121,25 @@ function createElement (elementTitle, elementLink) {
         console.log(eventTarget);
         eventTarget.classList.toggle('element__like_set');
     });
-    
-    
 
+
+
+    //находим кнопку recycle
+    const recycleButton = document.querySelector('.element__recycle');
+    //находим ближайшую карточку element к кнопке recycle
+    const currentElementRecycle = recycleButton.closest('.element');
+
+    //создаем слушатель событий на кнопку recycleButton, который будет удалять currentElementRecycle
+    recycleButton.addEventListener('click', function (evt) {
+        const currentElement = evt.target;
+        console.log(currentElement);
+        currentElementRecycle.remove();
+    })
 
 }
 
 
-
+// цикл создает 6 изначальных карточек
 
 for (let i = initialCards.length - 1; i >= 0; i--) {
     let elementTitleCounter = initialCards[i].name;
@@ -138,19 +151,3 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
 
 
 
-
-//function setLike () {
-//    if (likeButton.classList.contains('element__like_set')) {
- //       likeButton.classList.remove('element__like_set');
- //   }
- //   else {
- //       likeButton.classList.add('element__like_set');
- //   }
-//}
-
-//document.querySelector('.element__like').addEventListener('click', function (evt) {
-    //evt.target.classList.toggle('element__like_set');
-    //const eventTarget = evt.target;
-    //setLike (eventTarget);
-    //console.log(eventTarget);
-//});

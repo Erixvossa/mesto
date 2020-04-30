@@ -1,0 +1,26 @@
+.element__recycle {
+    align-self: center;
+    margin-left: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background-image: url(../../../images/recucle.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18px;
+    height: 19px;
+    background-color: transparent;
+    background-size: contain;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+
+}
+
+
+.element__recycle:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
