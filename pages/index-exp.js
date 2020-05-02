@@ -1,7 +1,20 @@
 //Находим и обьявляем в popup .popup
 const popup = document.querySelector('.popup');
-const popubButton = document.querySelector('.profilee-info__edit-button');
-const closeButton = document.querySelector('.popub__button-close');
+//Находим кнопку эдит автора
+const popubEditButton = document.querySelector('.profilee-info__edit-button');
+//находим кнопку добавить карточку element
+const addElementButton = document.querySelector('.profile__add-button');
+
+//Старая кнопка закрыть const closeButton = document.querySelector('.popub__button-close');
+
+
+
+
+
+
+
+
+
 let profileInfoTitle = document.querySelector('.profilee-info__title');
 
 //находим поле инпут_нейм, назначаем переменной popupInputName
@@ -43,22 +56,8 @@ const initialCards = [
 ];
 
 
-// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
-function openClosePopup () {
-    if (popup.classList.contains('popup_type_opened')) {
-        popup.classList.remove('popup_type_opened');
-    }
-    else {
-        popup.classList.add('popup_type_opened');
-        document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
-        document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
-    }
-}
 
 
-popubButton.addEventListener('click', openClosePopup);
-
-closeButton.addEventListener('click', openClosePopup);
 
 
 
@@ -137,8 +136,7 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
     createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
 
 
-//находим кнопку добавить карточку element
-const addElementButton = document.querySelector('.profile__add-button');
+
 
 addElementButton.addEventListener('click', openCloseAddElement);
 
@@ -174,13 +172,76 @@ function addElementHandler () {
 }
 
 
-formElement.addEventListener('submit', function(evt) {
-    evt.preventDefault(); 
-    if (document.querySelector('.popub__submit-button').textContent = 'Создать место') {
-        console.log('новое место');
-        addElementHandler ();
-    }
-    else {
-        formSubmitHandler ();
-    }
-});
+
+function createPopup () {
+    // находим и назначаем переменной шаблон
+    const elementPopup = document.querySelector('#popup').content;
+
+    // находим и назначем переменной контейнер, куда будем вставлять шаблон
+    const popupContainer = document.querySelector('.page');
+
+    // называем переменную для клонирования шаблона
+    const popupShow = elementPopup.cloneNode(true);
+    
+    // добавляем  пермеменную-скопированный шаблон в переменную контейнер в DOM
+    popupContainer.append(popupShow);
+
+
+
+
+
+
+
+
+
+    //находим кнопку закрыть попап
+    const closeButton = document.querySelector('.popub__button-close');
+    
+    //находим ближайшую карточку element к кнопке recycle
+    const currentPopupClose = closeButton.closest('.popup');
+    
+    //создаем слушатель событий на кнопку closeButton, который будет удалять popup
+    closeButton.addEventListener('click', function () {
+        currentPopupClose.remove();
+    })
+}
+
+
+
+function editAuthor () {
+    createPopup ();
+    //находим и обьявляем заголовок попапа
+let profileTitle = document.querySelector('.popup__title').textContent;
+
+// находим и обьявляем первое поле ввода в попапе
+const firstInput = document.querySelector('.popup__input_type_name');
+//находим и обьявляем плейсхолдер первого поля
+let firstInputPlaceholder = firstInput.getAttribute('placeholder');
+//находим и обьявляем введенный по умолчанию текст первого поля
+let firstInputDefault = firstInput.value;
+
+// находим и обьявляем второе поле ввода в попапе
+const secondInput = document.querySelector('.popup__input_type_subname');
+//находим и обьявляем плейсхолдер второго поля
+let secondInputPlaceholder = secondInput.placeholder;
+//находим и обьявляем введенный по умолчанию текст второго поля
+let secondInputDefault = secondInput.value;
+
+//находим и обьявляем кнопку сабмит в попапе
+const submitButton = document.querySelector('.popub__submit-button');
+//Находим и обьявляем текстовое наполнение кнопки сабмит
+let submitButtonTetx = submitButton.textContent;
+
+//Находим и обьявляем текущее значение Имени автора
+let currentName = document.querySelector('.profilee-info__title').textContent;
+//Находим и обьявляем текущее значение Профессии автора
+let currentProfession = document.querySelector('.profilee-info__subtitle').textContent;
+
+    profileTitle = 'Редактировать профиль';
+    firstInputPlaceholder = 'Имя';
+    secondInputPlaceholder = 'Профессия';
+    submitButtonTetx = 'Сохранить';
+    firstInputDefault = currentName;
+}
+
+popubEditButton.addEventListener('click', editAuthor);
