@@ -6,7 +6,6 @@ const popubEditButton = document.querySelector('.profilee-info__edit-button');
 const addElementButton = document.querySelector('.profile__add-button');
 
 
-
 // находим и обьявляем кнопку закрытия попапа
 const closeButton = document.querySelector('.popub__button-close');
 
@@ -14,37 +13,22 @@ const closeButton = document.querySelector('.popub__button-close');
 const profileTitle = document.querySelector('.popup__title');
 
 
-
 // находим и обьявляем первое поле ввода в попапе
 const firstInput = document.querySelector('.popup__input_type_name');
 
 let firstInputValue = firstInput.value;
 
-//находим и обьявляем плейсхолдер первого поля. Почему-то не работает.
-//let firstInputPlaceholder = firstInput.placeholder;
 //Находим и обьявляем текущее значение Имени автора
-let currentName = document.querySelector('.profilee-info__title').textContent;
-//находим и обьявляем введенный по умолчанию текст первого поля
-//let firstInputDefault = currentName;
-
+let currentName = document.querySelector('.profilee-info__title');
 
 // находим и обьявляем второе поле ввода в попапе
 const secondInput = document.querySelector('.popup__input_type_subname');
 //Находим и обьявляем текущее значение профессии автора
-let currentSubname = document.querySelector('.profilee-info__subtitle').textContent;
+let currentSubname = document.querySelector('.profilee-info__subtitle');
 
-//находим и обьявляем плейсхолдер второго поля
-//let secondInputPlaceholder = secondInput.placeholder;
-//находим и обьявляем введенный по умолчанию текст второго поля
-//let secondInputDefault = secondInput.value;
 
 //находим и обьявляем кнопку сабмит в попапе
 const submitButton = document.querySelector('.popub__submit-button');
-//Находим и обьявляем текстовое наполнение кнопки сабмит. Тоже почему-то не работает внутри функции
-//let submitButtonText = submitButton.textContent;
-
-//Находим и обьявляем текущее значение Профессии автора
-//let currentProfession = document.querySelector('.profilee-info__subtitle').textContent;
 
 // Находим форму в DOM
 const formElement = document.querySelector('form');
@@ -62,9 +46,56 @@ function openClosePopup () {
     }
 }
 
-function check () {
-    console.log('checked');
+
+
+function removeEventSubmit () {
+    formElement.removeEventListener ('submit', addeditInfoEventListener);
+    formElement.removeEventListener ('submit', addCreateElementEventLitener);
 }
+
+
+
+
+function addeditInfoEventListener () {
+    editAuthor (firstInput.value, secondInput.value);
+    openClosePopup ();
+}
+
+function editInfo () {
+    openClosePopup ();
+    removeEventSubmit ();
+    profileTitle.textContent = 'Редактировать профиль';
+    firstInput.placeholder = 'Имя';
+    firstInput.value = currentName.textContent;
+    secondInput.placeholder = 'Профессия';
+    secondInput.value = currentSubname.textContent;
+    submitButton.textContent = 'Сохранить';
+    formElement.addEventListener('submit', addeditInfoEventListener);
+}
+
+
+function addCreateElementEventLitener(evt) {
+    evt.preventDefault();
+    createElement (firstInput.value, secondInput.value);
+    openClosePopup ();
+}
+
+
+
+function addElement () {
+    openClosePopup ();
+    removeEventSubmit ();
+    profileTitle.textContent = 'Создать место';
+    firstInput.placeholder = 'Название места';
+    firstInput.value = '';
+    secondInput.placeholder = 'URL';
+    secondInput.value = '';
+    submitButton.textContent = 'Создать';
+    formElement.addEventListener('submit', addCreateElementEventLitener);
+}
+
+
+
 
 
 // слушатеь событий на открытие попапа эдит автор
@@ -74,45 +105,9 @@ popubEditButton.addEventListener('click', editInfo);
 addElementButton.addEventListener('click', addElement);
 
 
-function editInfo () {
-    check ();
-    openClosePopup ();
-    profileTitle.textContent = 'Редактировать профиль';
-    firstInput.placeholder = 'Имя';
-    firstInput.value = currentName;
-    secondInput.placeholder = 'Профессия';
-    secondInput.value = currentSubname;
-    submitButton.textContent = 'Сохранить';
-}
-
-
-
-
-function addElement () {
-    openClosePopup ();
-    profileTitle.textContent = 'Создать место';
-    firstInput.placeholder = 'Название места';
-    firstInputValue = '';
-    secondInput.placeholder = 'URL';
-    secondInput.value = '';
-    submitButton.textContent = 'Создать';
-    formElement.addEventListener('submit', function (evt) {
-        evt.preventDefault();
-        //createElement (firstInput.value, secondInput.value);
-        openClosePopup ();
-    });
-}
-
-
-
 
 closeButton.addEventListener('click', openClosePopup);
 
-//находим поле инпут_нейм, назначаем переменной popupInputName
-//let popupInputName = document.querySelector('.popup__input_type_name');
-
-//находим поле инпут_сабнейм, назначаем переменной popupInputSubname
-//let popupInputSubname = document.querySelector('.popup__input_type_subname');
 
 
 
@@ -148,14 +143,15 @@ const initialCards = [
 
 
 
+//функция изменения имени и профессии по странице. принимает 2 значения и заменяет ими текущие.
+function editAuthor (firstValue, secondValue) {
+    currentName.textContent = firstValue;
+    currentSubname.textContent = secondValue;
+}
 
 
 
-
-
-
-
-
+//функция создания элемента, принимает на вход 2 значения (имя и ссылка на картинку)
 function createElement (elementTitle, elementLink) {
     const elementTemplate = document.querySelector('#element').content;
     const elementsContainer = document.querySelector('.elements');
@@ -200,8 +196,6 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
     let elementSrcCounter = initialCards[i].link;
     createElement (initialCards[i].name, initialCards[i].link);
 }
-
-    createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
 
 
 
