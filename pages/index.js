@@ -1,20 +1,52 @@
 //Находим и обьявляем в popup .popup
 const popup = document.querySelector('.popup');
-const popubButton = document.querySelector('.profilee-info__edit-button');
+
+//Находим и обьявляем в popupImg .popup-img
+const popupImg = document.querySelector('.popup-img');
+
+//Находим кнопку эдит автора
+const popubEditButton = document.querySelector('.profilee-info__edit-button');
+//находим кнопку добавить карточку element
+const addElementButton = document.querySelector('.profile__add-button');
+
+
+// находим и обьявляем кнопку закрытия попапа
 const closeButton = document.querySelector('.popub__button-close');
-let profileInfoTitle = document.querySelector('.profilee-info__title');
 
-//находим поле инпут_нейм, назначаем переменной popupInputName
-let popupInputName = document.querySelector('.popup__input_type_name');
+// находим и обьявляем кнопку закрытия попапа-img
+const closeImgButton = document.querySelector('.popup-img__button-close');
 
-//находим поле инпут_сабнейм, назначаем переменной popupInputSubname
-let popupInputSubname = document.querySelector('.popup__input_type_subname');
+//находим и обьявляем картинку в имг попапе
+const popupImgImage = document.querySelector('.popup-img__image');
+//находим и обьявляем заголовок в имг попапе
+const popupImgTitle = document.querySelector('.popup-img__title');
 
+
+//находим и обьявляем заголовок попапа
+const profileTitle = document.querySelector('.popup__title');
+
+
+// находим и обьявляем первое поле ввода в попапе
+const firstInput = document.querySelector('.popup__input_type_name');
+
+let firstInputValue = firstInput.value;
+
+//Находим и обьявляем текущее значение Имени автора
+let currentName = document.querySelector('.profilee-info__title');
+
+// находим и обьявляем второе поле ввода в попапе
+const secondInput = document.querySelector('.popup__input_type_subname');
+//Находим и обьявляем текущее значение профессии автора
+let currentSubname = document.querySelector('.profilee-info__subtitle');
+
+
+//находим и обьявляем кнопку сабмит в попапе
+const submitButton = document.querySelector('.popub__submit-button');
 
 // Находим форму в DOM
-let formElement = document.querySelector('form');
+const formElement = document.querySelector('form');
 
-let popupType = '';
+
 
 
 // Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
@@ -24,42 +56,82 @@ function openClosePopup () {
     }
     else {
         popup.classList.add('popup_type_opened');
-        document.querySelector('.popup__input_type_name').value = document.querySelector('.profilee-info__title').textContent;
-        document.querySelector('.popup__input_type_subname').value = document.querySelector('.profilee-info__subtitle').textContent;
-        popupType = 'author'; // экспериментальная часть
+    }
+}
+
+// Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
+function openCloseImgPopup () {
+    if (popupImg.classList.contains('popup-img_type_opened')) {
+        popupImg.classList.remove('popup-img_type_opened');
+    }
+    else {
+        popupImg.classList.add('popup-img_type_opened');
     }
 }
 
 
-popubButton.addEventListener('click', openClosePopup);
+function removeEventSubmit () {
+    formElement.removeEventListener ('submit', addeditInfoEventListener);
+    formElement.removeEventListener ('submit', addCreateElementEventLitener);
+}
 
-closeButton.addEventListener('click', openClosePopup);
 
 
 
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Находим поля формы в DOM
-    let nameInput = formElement.querySelector('.popup__input_type_name').value;
-    let jobInput = formElement.querySelector('.popup__input_type_subname').value;
-    // Получите значение полей из свойства value
-    // Выберите элементы, куда должны быть вставлены значения полей
-    
-    // Вставьте новые значения с помощью textContent
-    document.querySelector('.profilee-info__title').textContent = nameInput;
-    document.querySelector('.profilee-info__subtitle').textContent = jobInput;
+function addeditInfoEventListener () {
+    editAuthor (firstInput.value, secondInput.value);
     openClosePopup ();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-//formElement.addEventListener('submit', formSubmitHandler);
+function editInfo () {
+    openClosePopup ();
+    removeEventSubmit ();
+    profileTitle.textContent = 'Редактировать профиль';
+    firstInput.placeholder = 'Имя';
+    firstInput.value = currentName.textContent;
+    secondInput.placeholder = 'Профессия';
+    secondInput.value = currentSubname.textContent;
+    submitButton.textContent = 'Сохранить';
+    formElement.addEventListener('submit', addeditInfoEventListener);
+}
+
+
+function addCreateElementEventLitener(evt) {
+    evt.preventDefault();
+    createElement (firstInput.value, secondInput.value);
+    openClosePopup ();
+}
+
+
+
+function addElement () {
+    openClosePopup ();
+    removeEventSubmit ();
+    profileTitle.textContent = 'Создать место';
+    firstInput.placeholder = 'Название места';
+    firstInput.value = '';
+    secondInput.placeholder = 'URL';
+    secondInput.value = '';
+    submitButton.textContent = 'Создать';
+    formElement.addEventListener('submit', addCreateElementEventLitener);
+}
+
+
+
+
+
+// слушатеь событий на открытие попапа эдит автор
+popubEditButton.addEventListener('click', editInfo);
+
+// слушатеь событий на открытие попапа создать элемент
+addElementButton.addEventListener('click', addElement);
+
+//слушатель событий на закрытие img-попапа
+closeImgButton.addEventListener('click', openCloseImgPopup);
+
+//слушатель событий на закрытие попапа
+closeButton.addEventListener('click', openClosePopup);
+
 
 
 
@@ -95,18 +167,28 @@ const initialCards = [
 
 
 
+//функция изменения имени и профессии по странице. принимает 2 значения и заменяет ими текущие.
+function editAuthor (firstValue, secondValue) {
+    currentName.textContent = firstValue;
+    currentSubname.textContent = secondValue;
+}
 
 
+
+//функция создания элемента, принимает на вход 2 значения (имя и ссылка на картинку)
 function createElement (elementTitle, elementLink) {
     const elementTemplate = document.querySelector('#element').content;
     const elementsContainer = document.querySelector('.elements');
     const elementShow = elementTemplate.cloneNode(true);
-    
+    const elementTitleTemplate = elementShow.querySelector('.element__title');
+    const elementPhotoTemplate = elementShow.querySelector('.element__photo');
 
-    elementShow.querySelector('.element__title').textContent = elementTitle;
-    elementShow.querySelector('.element__photo').src = elementLink;
 
+    elementTitleTemplate.textContent = elementTitle;
+    elementPhotoTemplate.src = elementLink;
+    elementPhotoTemplate.setAttribute('alt', elementTitle);
     elementsContainer.prepend(elementShow);
+
 
     //находим кнопку like
     const likeButton = document.querySelector('.element__like');
@@ -116,11 +198,29 @@ function createElement (elementTitle, elementLink) {
         // button, на который мы кликнули
     
         const eventTarget = evt.target;
-        console.log(eventTarget);
         eventTarget.classList.toggle('element__like_set');
     });
 
+// Экспериментальная часть про создание попап имг на странице
 
+    elementPhotoTemplate.addEventListener('click', function (evt) {
+        const currentElement = evt.target;
+        openCloseImgPopup ();
+        popupImgImage.src = elementLink;
+        //дописать смену alt='' всплывающей картинки
+        popupImgImage.setAttribute('alt', elementTitle);
+        popupImgTitle.textContent = elementTitle;
+
+    });
+
+
+
+
+
+
+
+
+// Экспериментальная часть про создание попап имг на странице
 
     //находим кнопку recycle
     const recycleButton = document.querySelector('.element__recycle');
@@ -130,7 +230,6 @@ function createElement (elementTitle, elementLink) {
     //создаем слушатель событий на кнопку recycleButton, который будет удалять currentElementRecycle
     recycleButton.addEventListener('click', function (evt) {
         const currentElement = evt.target;
-        console.log(currentElement);
         currentElementRecycle.remove();
     })
 
@@ -145,55 +244,8 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
     createElement (initialCards[i].name, initialCards[i].link);
 }
 
-    createElement('москва', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
 
 
-//находим кнопку добавить карточку element
-const addElementButton = document.querySelector('.profile__add-button');
 
-addElementButton.addEventListener('click', openCloseAddElement);
 
-function openCloseAddElement () {
-    document.querySelector('.popup__title').textContent = 'Новое место'
-    document.querySelector('.popub__submit-button').textContent = 'Создать место'
-    if (popup.classList.contains('popup_type_opened')) {
-        popup.classList.remove('popup_type_opened');
-    }
-    else {
-        popup.classList.add('popup_type_opened');
-        popupInputName.placeholder = "Название"
-        popupInputName.value = '';
-        popupInputSubname.placeholder = "Ссылка на картинку"
-        popupInputSubname.value = '';
-        popupType = 'addElement'; // экспериментальная часть
-    }
-}
 
-function addElementHandler (evt) {
-    evt.preventDefault(); 
-    // Эта строчка отменяет стандартную отправку формы.
-    // Так мы можем определить свою логику отправки.
-    // О том, как это делать, расскажем позже.
-
-    // Находим поля формы в DOM
-    let nameInput = formElement.querySelector('.popup__input_type_name').value;
-    let urlInput = formElement.querySelector('.popup__input_type_subname').value;
-    // Получите значение полей из свойства value
-
-    createElement(nameInput, urlInput);
-    openCloseAddElement ();
-}
-
-function chooseHandler (evt) {
-    evt.preventDefault(); 
-    if (popupType = 'author') {
-        formSubmitHandler ();
-    }
-    else {
-        addElementHandler ();
-    }
-}
-
-formElement.addEventListener('submit', chooseHandler);
-
-console.log (popupType);
