@@ -1,5 +1,9 @@
 //Находим и обьявляем в popup .popup
 const popup = document.querySelector('.popup');
+
+//Находим и обьявляем в popupImg .popup-img
+const popupImg = document.querySelector('.popup-img');
+
 //Находим кнопку эдит автора
 const popubEditButton = document.querySelector('.profilee-info__edit-button');
 //находим кнопку добавить карточку element
@@ -8,6 +12,15 @@ const addElementButton = document.querySelector('.profile__add-button');
 
 // находим и обьявляем кнопку закрытия попапа
 const closeButton = document.querySelector('.popub__button-close');
+
+// находим и обьявляем кнопку закрытия попапа-img
+const closeImgButton = document.querySelector('.popup-img__button-close');
+
+//находим и обьявляем картинку в имг попапе
+const popupImgImage = document.querySelector('.popup-img__image');
+//находим и обьявляем заголовок в имг попапе
+const popupImgTitle = document.querySelector('.popup-img__title');
+
 
 //находим и обьявляем заголовок попапа
 const profileTitle = document.querySelector('.popup__title');
@@ -46,6 +59,15 @@ function openClosePopup () {
     }
 }
 
+// Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
+function openCloseImgPopup () {
+    if (popupImg.classList.contains('popup-img_type_opened')) {
+        popupImg.classList.remove('popup-img_type_opened');
+    }
+    else {
+        popupImg.classList.add('popup-img_type_opened');
+    }
+}
 
 
 function removeEventSubmit () {
@@ -104,8 +126,10 @@ popubEditButton.addEventListener('click', editInfo);
 // слушатеь событий на открытие попапа создать элемент
 addElementButton.addEventListener('click', addElement);
 
+//слушатель событий на закрытие img-попапа
+closeImgButton.addEventListener('click', openCloseImgPopup);
 
-
+//слушатель событий на закрытие попапа
 closeButton.addEventListener('click', openClosePopup);
 
 
@@ -156,10 +180,12 @@ function createElement (elementTitle, elementLink) {
     const elementTemplate = document.querySelector('#element').content;
     const elementsContainer = document.querySelector('.elements');
     const elementShow = elementTemplate.cloneNode(true);
-    
+    const elementTitleTemplate = elementShow.querySelector('.element__title');
+    const elementPhotoTemplate = elementShow.querySelector('.element__photo');
 
-    elementShow.querySelector('.element__title').textContent = elementTitle;
-    elementShow.querySelector('.element__photo').src = elementLink;
+
+    elementTitleTemplate.textContent = elementTitle;
+    elementPhotoTemplate.src = elementLink;
 
     elementsContainer.prepend(elementShow);
 
@@ -174,6 +200,23 @@ function createElement (elementTitle, elementLink) {
         eventTarget.classList.toggle('element__like_set');
     });
 
+// Экспериментальная часть про создание попап имг на странице
+
+    elementPhotoTemplate.addEventListener('click', function (evt) {
+        const currentElement = evt.target;
+        openCloseImgPopup ();
+        popupImgImage.src = elementLink;
+        popupImgTitle.textContent = elementTitle;
+    });
+
+
+
+
+
+
+
+
+// Экспериментальная часть про создание попап имг на странице
 
     //находим кнопку recycle
     const recycleButton = document.querySelector('.element__recycle');
@@ -196,7 +239,6 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
     let elementSrcCounter = initialCards[i].link;
     createElement (initialCards[i].name, initialCards[i].link);
 }
-
 
 
 
