@@ -1,20 +1,43 @@
-//Находим и обьявляем в popup .popup
+//находим и обьявляем, куда будут добавляться элементы
+const elementsContainer = document.querySelector('.elements');
+
+//Находим и обьявляем попап с профилем
 const popup = document.querySelector('.popup');
+
+//Находим и обьявляем попап с добавлением элемента
+const popupAdd = document.querySelector('.popup-add');
 
 //Находим и обьявляем в popupImg .popup-img
 const popupImg = document.querySelector('.popup-img');
 
 //Находим кнопку эдит автора
 const popubEditButton = document.querySelector('.profilee-info__edit-button');
-//находим кнопку добавить карточку element
-const addElementButton = document.querySelector('.profile__add-button');
 
+//находим кнопку добавить карточку element
+const popubAddButton = document.querySelector('.profile__add-button');
 
 // находим и обьявляем кнопку закрытия попапа
 const closeButton = document.querySelector('.popub__button-close');
 
+// находим и обьявляем кнопку закрытия попапа с добавлением
+const closeAddButton = document.querySelector('.popub-add__button-close');
+
 // находим и обьявляем кнопку закрытия попапа-img
 const closeImgButton = document.querySelector('.popup-img__button-close');
+
+//находим и обьявляем кнопки сабмитов
+const submitEditButton = document.querySelector('.popub__submit-button');
+const submitAddButton = document.querySelector('.popub-add__submit-button');
+
+//находим и обьявляем размещенные на странице имя и профессию
+const currentName = document.querySelector('.profilee-info__title');
+const currentProfession = document.querySelector('.profilee-info__subtitle');
+
+//находим и обьявляем поля вводов попапов
+const authorNameInput = document.querySelector('.popup__input_type_name');
+const authorProfessionInput = document.querySelector('.popup__input_type_subname');
+const elementTitleInput = document.querySelector('.popup-add__input_type_name');
+const elementImageInput = document.querySelector('.popup-add__input_type_url');
 
 //находим и обьявляем картинку в имг попапе
 const popupImgImage = document.querySelector('.popup-img__image');
@@ -22,132 +45,9 @@ const popupImgImage = document.querySelector('.popup-img__image');
 const popupImgTitle = document.querySelector('.popup-img__title');
 
 
-//находим и обьявляем заголовок попапа
-const profileTitle = document.querySelector('.popup__title');
 
 
-// находим и обьявляем первое поле ввода в попапе
-const firstInput = document.querySelector('.popup__input_type_name');
-
-let firstInputValue = firstInput.value;
-
-//Находим и обьявляем текущее значение Имени автора
-let currentName = document.querySelector('.profilee-info__title');
-
-// находим и обьявляем второе поле ввода в попапе
-const secondInput = document.querySelector('.popup__input_type_subname');
-//Находим и обьявляем текущее значение профессии автора
-let currentSubname = document.querySelector('.profilee-info__subtitle');
-
-
-//находим и обьявляем кнопку сабмит в попапе
-const submitButton = document.querySelector('.popub__submit-button');
-
-// Находим форму в DOM
-const formElement = document.querySelector('form');
-
-
-
-
-// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
-function openClosePopup () {
-    if (popup.classList.contains('popup_type_opened')) {
-        popup.classList.remove('popup_type_opened');
-    }
-    else {
-        popup.classList.add('popup_type_opened');
-    }
-}
-
-// Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
-function openCloseImgPopup () {
-    if (popupImg.classList.contains('popup-img_type_opened')) {
-        popupImg.classList.remove('popup-img_type_opened');
-    }
-    else {
-        popupImg.classList.add('popup-img_type_opened');
-    }
-}
-
-
-function removeEventSubmit () {
-    formElement.removeEventListener ('submit', addeditInfoEventListener);
-    formElement.removeEventListener ('submit', addCreateElementEventLitener);
-}
-
-
-
-
-function addeditInfoEventListener () {
-    editAuthor (firstInput.value, secondInput.value);
-    openClosePopup ();
-}
-
-
-
-//функция изменения имени и профессии по странице. принимает 2 значения и заменяет ими текущие.
-function editAuthor (firstValue, secondValue) {
-    document.querySelector('.profilee-info__title').textContent = firstValue;
-    currentSubname.textContent = secondValue;
-}
-
-
-// слушатеь событий на открытие попапа эдит автор
-popubEditButton.addEventListener('click', editInfo);
-
-
-
-function editInfo () {
-    openClosePopup ();
-    removeEventSubmit ();
-    profileTitle.textContent = 'Редактировать профиль';
-    firstInput.placeholder = 'Имя';
-    firstInput.value = currentName.textContent;
-    secondInput.placeholder = 'Профессия';
-    secondInput.value = currentSubname.textContent;
-    submitButton.textContent = 'Сохранить';
-    formElement.addEventListener('submit', addeditInfoEventListener);
-}
-
-
-function addCreateElementEventLitener(evt) {
-    evt.preventDefault();
-    createElement (firstInput.value, secondInput.value);
-    openClosePopup ();
-}
-
-
-
-function addElement () {
-    openClosePopup ();
-    removeEventSubmit ();
-    profileTitle.textContent = 'Создать место';
-    firstInput.placeholder = 'Название места';
-    firstInput.value = '';
-    secondInput.placeholder = 'URL';
-    secondInput.value = '';
-    submitButton.textContent = 'Создать';
-    formElement.addEventListener('submit', addCreateElementEventLitener);
-}
-
-
-
-
-
-// слушатеь событий на открытие попапа создать элемент
-addElementButton.addEventListener('click', addElement);
-
-//слушатель событий на закрытие img-попапа
-closeImgButton.addEventListener('click', openCloseImgPopup);
-
-//слушатель событий на закрытие попапа
-closeButton.addEventListener('click', openClosePopup);
-
-
-
-
-
-
+// добавляем названия и адреса изначальных карточек
 const initialCards = [
     {
         name: 'Архыз',
@@ -177,27 +77,54 @@ const initialCards = [
 
 
 
+// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
+function openClosePopup () {
+    if (popup.classList.contains('popup_type_opened')) {
+        popup.classList.remove('popup_type_opened');
+    }
+    else {
+        popup.classList.add('popup_type_opened');
+    }
+}
 
+// Функция открытия/закрытия попапа c добавлением элемента 
+function openCloseAddPopup () {
+    if (popupAdd.classList.contains('popup-add_type_opened')) {
+        popupAdd.classList.remove('popup-add_type_opened');
+    }
+    else {
+        popupAdd.classList.add('popup-add_type_opened');
+    }
+}
+
+// Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
+function openCloseImgPopup () {
+    if (popupImg.classList.contains('popup-img_type_opened')) {
+        popupImg.classList.remove('popup-img_type_opened');
+    }
+    else {
+        popupImg.classList.add('popup-img_type_opened');
+    }
+}
 
 
 
 //функция создания элемента, принимает на вход 2 значения (имя и ссылка на картинку)
 function createElement (elementTitle, elementLink) {
     const elementTemplate = document.querySelector('#element').content;
-    const elementsContainer = document.querySelector('.elements');
     const elementShow = elementTemplate.cloneNode(true);
     const elementTitleTemplate = elementShow.querySelector('.element__title');
     const elementPhotoTemplate = elementShow.querySelector('.element__photo');
-
+    //находим кнопку like
+    const likeButton = elementShow.querySelector('.element__like');
+    //находим кнопку recycle
+    const recycleButton = elementShow.querySelector('.element__recycle');
+    //находим ближайшую карточку element к кнопке recycle
+    const currentElementRecycle = recycleButton.closest('.element');
 
     elementTitleTemplate.textContent = elementTitle;
     elementPhotoTemplate.src = elementLink;
     elementPhotoTemplate.setAttribute('alt', elementTitle);
-    elementsContainer.prepend(elementShow);
-
-
-    //находим кнопку like
-    const likeButton = document.querySelector('.element__like');
 
     likeButton.addEventListener('click', function (evt) {
         // в переменной eventTarget окажется элемент
@@ -207,43 +134,77 @@ function createElement (elementTitle, elementLink) {
         eventTarget.classList.toggle('element__like_set');
     });
 
-// Экспериментальная часть про создание попап имг на странице
-
+    //Слушатель событий на создание попапа укрупненного просмотра картинки 
     elementPhotoTemplate.addEventListener('click', function (evt) {
         const currentElement = evt.target;
         openCloseImgPopup ();
         popupImgImage.src = elementLink;
-        //дописать смену alt='' всплывающей картинки
         popupImgImage.setAttribute('alt', elementTitle);
         popupImgTitle.textContent = elementTitle;
-
     });
-
-
-    //находим кнопку recycle
-    const recycleButton = document.querySelector('.element__recycle');
-    //находим ближайшую карточку element к кнопке recycle
-    const currentElementRecycle = recycleButton.closest('.element');
 
     //создаем слушатель событий на кнопку recycleButton, который будет удалять currentElementRecycle
     recycleButton.addEventListener('click', function (evt) {
         const currentElement = evt.target;
         currentElementRecycle.remove();
     })
-
-}
-
-
-// цикл создает 6 изначальных карточек
-
-for (let i = initialCards.length - 1; i >= 0; i--) {
-    let elementTitleCounter = initialCards[i].name;
-    let elementSrcCounter = initialCards[i].link;
-    createElement (initialCards[i].name, initialCards[i].link);
+    return elementShow;
 }
 
 
 
+//функция изменения имени и профессии по странице.
+function editAuthor (evt) {
+    evt.preventDefault();
+    currentName.textContent = authorNameInput.value;
+    currentProfession.textContent = authorProfessionInput.value;
+    openClosePopup();
+}
+
+
+//функция получения имени и профессии из попапа эдит
+function takeNewAuthor () {
+    openClosePopup();
+    authorNameInput.value = currentName.textContent;
+    authorProfessionInput.value = currentProfession.textContent;
+}
+
+//функция добавления элемента на страницу из попапа имг
+function addNewElement (evt) {
+    evt.preventDefault();
+    const newElement = createElement(elementTitleInput.value, elementImageInput.value);
+    elementsContainer.prepend(newElement);
+    elementTitleInput.value = '';
+    elementImageInput.value = '';
+    openCloseAddPopup();
+}
+
+
+initialCards.forEach(element => {
+    elementsContainer.append(createElement(element.name, element.link));
+});
+
+
+//добавляем слушатель событий на кнопку эдит автор
+popubEditButton.addEventListener('click', takeNewAuthor);
+
+//добавляем слушатель событий на кнопку добавить элемент
+popubAddButton.addEventListener('click', openCloseAddPopup);
+
+//добавляем слушатель событий на кнопку закрыть попап эдит автор
+closeButton.addEventListener('click', openClosePopup);
+
+//добавляем слушатель событий на кнопку закрыть попап добавить элемент
+closeAddButton.addEventListener('click', openCloseAddPopup);
+
+//Добавляем слушатель событий на кнопку сабмит эдит
+submitEditButton.addEventListener('click', editAuthor);
+
+//Добавляем слушатель событий на кнопку сабмит адд
+submitAddButton.addEventListener('click', addNewElement);
+
+//слушатель событий на закрытие img-попапа
+closeImgButton.addEventListener('click', openCloseImgPopup);
 
 
 
