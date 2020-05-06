@@ -83,6 +83,20 @@ function addeditInfoEventListener () {
     openClosePopup ();
 }
 
+
+
+//функция изменения имени и профессии по странице. принимает 2 значения и заменяет ими текущие.
+function editAuthor (firstValue, secondValue) {
+    document.querySelector('.profilee-info__title').textContent = firstValue;
+    currentSubname.textContent = secondValue;
+}
+
+
+// слушатеь событий на открытие попапа эдит автор
+popubEditButton.addEventListener('click', editInfo);
+
+
+
 function editInfo () {
     openClosePopup ();
     removeEventSubmit ();
@@ -119,9 +133,6 @@ function addElement () {
 
 
 
-
-// слушатеь событий на открытие попапа эдит автор
-popubEditButton.addEventListener('click', editInfo);
 
 // слушатеь событий на открытие попапа создать элемент
 addElementButton.addEventListener('click', addElement);
@@ -167,11 +178,6 @@ const initialCards = [
 
 
 
-//функция изменения имени и профессии по странице. принимает 2 значения и заменяет ими текущие.
-function editAuthor (firstValue, secondValue) {
-    currentName.textContent = firstValue;
-    currentSubname.textContent = secondValue;
-}
 
 
 
@@ -213,14 +219,6 @@ function createElement (elementTitle, elementLink) {
 
     });
 
-
-
-
-
-
-
-
-// Экспериментальная часть про создание попап имг на странице
 
     //находим кнопку recycle
     const recycleButton = document.querySelector('.element__recycle');

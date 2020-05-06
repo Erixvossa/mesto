@@ -1,0 +1,18 @@
+@import url(./__button-close/popub-add__button-close.css);
+@import url(./__container/popup-add__container.css);
+@import url(./__title/popup-add__title.css);
+@import url(./__input/popup-add__input.css);
+@import url(./__submit-button/popub-add__submit-button.css);
+@import url(./_type/popup-add_type_closed.css);
+@import url(./_type/popup-add_type_opened.css);
+
+
+.popup-add {
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top: 0;
+    left: 0;
+}

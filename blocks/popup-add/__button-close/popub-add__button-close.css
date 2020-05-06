@@ -1,0 +1,28 @@
+.popub-add__button-close {
+    position: absolute;
+    top: -40px;
+    right: -41px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 0;
+    align-self: center;
+    background-image: url(../../../images/popup__close-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0);
+    width: 45px;
+    height: 45px;
+}
+
+.popub-add__button-close:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .popub-add__button-close {
+        right: -7px;
+    }
+}
