@@ -122,18 +122,6 @@ function createElement (elementTitle, elementLink) {
     //находим ближайшую карточку element к кнопке recycle
     const currentElementRecycle = recycleButton.closest('.element');
 
-
-    
-    //Обратная связь по этому пункту от проверяющего:
-    elementsContainer.prepend(elementShow);
-    //Добавление карточки к контейнеру всех карточек надо делать при рендере карточек и при сабмите
-    // формы карточки, введя дополнительную функцию добавления карточки к общему списку 
-    //(то есть команду elementsContainer.prepend(elementShow)  надо убрать из функции createElement 
-    //и поместить в другую),так как в соответствии с принципом единственной ответственности функции,
-    // createElement должна отвечать только за создание элемента карточки и возврат его в инструкции return.
-    // Она не должна зависеть от размётки на странице - от константы elementsContainer.
-    //Тогда createElement можно будет использовать и в других проектах, где бы так же нужен был шаблон карточки.
-
     elementTitleTemplate.textContent = elementTitle;
     elementPhotoTemplate.src = elementLink;
     elementPhotoTemplate.setAttribute('alt', elementTitle);
@@ -160,8 +148,8 @@ function createElement (elementTitle, elementLink) {
         const currentElement = evt.target;
         currentElementRecycle.remove();
     })
+    return elementShow;
 }
-
 
 
 
@@ -184,16 +172,16 @@ function takeNewAuthor () {
 //функция добавления элемента на страницу из попапа имг
 function addNewElement (evt) {
     evt.preventDefault();
-    createElement(elementTitleInput.value, elementImageInput.value);
+    const newElement = createElement(elementTitleInput.value, elementImageInput.value);
+    elementsContainer.prepend(newElement);
     elementTitleInput.value = '';
     elementImageInput.value = '';
     openCloseAddPopup();
 }
 
 
-
 initialCards.forEach(element => {
-    createElement (element.name, element.link);
+    elementsContainer.append(createElement(element.name, element.link));
 });
 
 
