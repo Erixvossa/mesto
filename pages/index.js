@@ -25,9 +25,11 @@ const closeAddButton = document.querySelector('.popub-add__button-close');
 // находим и обьявляем кнопку закрытия попапа-img
 const closeImgButton = document.querySelector('.popup-img__button-close');
 
-//находим и обьявляем кнопки сабмитов
-const submitEditButton = document.querySelector('.popub__submit-button');
-const submitAddButton = document.querySelector('.popub-add__submit-button');
+//находим и обьявляем формы попапов
+const editForm = document.querySelector('.popup__container');
+const addform = document.querySelector('.popup-add__container');
+
+
 
 //находим и обьявляем размещенные на странице имя и профессию
 const currentName = document.querySelector('.profilee-info__title');
@@ -197,11 +199,11 @@ closeButton.addEventListener('click', openClosePopup);
 //добавляем слушатель событий на кнопку закрыть попап добавить элемент
 closeAddButton.addEventListener('click', openCloseAddPopup);
 
-//Добавляем слушатель событий на кнопку сабмит эдит
-submitEditButton.addEventListener('click', editAuthor);
+//Добавляем слушатель событий на форму эдит
+editForm.addEventListener('submit', editAuthor);
 
-//Добавляем слушатель событий на кнопку сабмит адд
-submitAddButton.addEventListener('click', addNewElement);
+//Добавляем слушатель событий на форму адд
+addform.addEventListener('submit', addNewElement);
 
 //слушатель событий на закрытие img-попапа
 closeImgButton.addEventListener('click', openCloseImgPopup);
