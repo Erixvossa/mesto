@@ -3,6 +3,8 @@ const elementsContainer = document.querySelector('.elements');
 
 //Находим и обьявляем попап с профилем
 const popup = document.querySelector('.popup');
+const popupTitle = popup.querySelector('.popup__title');
+const popupSubmitButton = popup.querySelector('.popub__submit-button');
 
 //Находим и обьявляем попап с добавлением элемента
 const popupAdd = document.querySelector('.popup-add');
@@ -79,13 +81,43 @@ const initialCards = [
 
 
 
+
+
+
+//функция закрытия попапа по нажатию эск
+function escClosePopup(evt) {
+    if (evt.key === 'Escape') {
+    console.log('esc');
+    openClosePopup ();
+    }
+}
+
+//функция закрытия попапа по нажатию не на попап
+function popupClickAnywhereClose(evt) {
+    if (evt.target !== editForm && evt.target !== authorNameInput && evt.target !== authorProfessionInput && evt.target !== popupTitle && evt.target !== popupSubmitButton || evt.target === closeButton) {
+    //console.log('клик мимо');
+    //console.log(!evt.target.closest('.popup'));
+    openClosePopup (); 
+    }
+};
+
+
+
+
 // Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
 function openClosePopup () {
     if (popup.classList.contains('popup_type_opened')) {
         popup.classList.remove('popup_type_opened');
+        //снятие слушателя событий на закрытие попапа кликом мимо
+        document.removeEventListener('click', popupClickAnywhereClose);
+        //снятие слушателя событий на закрытие попапап кнопкой эск
+        document.removeEventListener('keydown', escClosePopup);
     }
     else {
         popup.classList.add('popup_type_opened');
+        //слушатель событий на закрытие попапа кнопкой эск
+        document.addEventListener('keydown', escClosePopup);
+        popup.addEventListener('click', popupClickAnywhereClose);
     }
 }
 
@@ -194,7 +226,7 @@ popubEditButton.addEventListener('click', takeNewAuthor);
 popubAddButton.addEventListener('click', openCloseAddPopup);
 
 //добавляем слушатель событий на кнопку закрыть попап эдит автор
-closeButton.addEventListener('click', openClosePopup);
+//closeButton.addEventListener('click', openClosePopup);
 
 //добавляем слушатель событий на кнопку закрыть попап добавить элемент
 closeAddButton.addEventListener('click', openCloseAddPopup);
@@ -207,6 +239,11 @@ addform.addEventListener('submit', addNewElement);
 
 //слушатель событий на закрытие img-попапа
 closeImgButton.addEventListener('click', openCloseImgPopup);
+
+
+
+
+
 
 
 
