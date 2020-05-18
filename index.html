@@ -46,24 +46,27 @@
 
 
     <div class="popup popup_type_closed">
-            <form class="popup__container" name="popup-form" method="GET" action="#">
-                <button class="popub__button-close" type="reset"></button>
-                <p class="popup__title">Редактировать профиль</p>
-                <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name" required>
-                <input class="popup__input popup__input_type_subname" type="text" placeholder="Профессия" name="profession" required>
-                <button class="popub__submit-button" type="submit">Сохранить</button>
-            </form>
+        <form class="popup__container" name="popup-form" method="GET" action="#" novalidate>
+
+            <button class="popub__button-close" type="reset"></button>
+            <p class="popup__title">Редактировать профиль</p>
+            <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name" required minlength="2" maxlength="40">
+                <span class='form__input-error' id='name__input-error'>текст ошибки</span>
+            <input class="popup__input popup__input_type_subname" type="text" placeholder="Профессия" name="profession" required minlength="2" maxlength="200">
+            <button class="popub__submit-button" type="submit">Сохранить</button>
+
+        </form>
     </div>
 
     <div class="popup-add popup-add_type_closed">
-        <form class="popup-add__container" name="popup-form" method="GET" action="#">
+        <form class="popup-add__container" name="popup-form" method="GET" action="#" novalidate>
             <button class="popub-add__button-close" type="reset"></button>
             <p class="popup-add__title">Новое место</p>
             <input class="popup-add__input popup-add__input_type_name" type="text" placeholder="Название" name="name" required>
-            <input class="popup-add__input popup-add__input_type_url" type="text" placeholder="Ссылка на картинку" name="url" required>
+            <input class="popup-add__input popup-add__input_type_url" type="url" placeholder="Ссылка на картинку" name="url" required>
             <button class="popub-add__submit-button" type="submit">Создать</button>
         </form>
-</div>
+    </div>
 
     
     <template id='element'>
@@ -77,6 +80,7 @@
         </div>
     </template>
 <script src="./pages/index.js"></script>
+<script src="./pages/validate.js"></script>
 </body>
 
 </html>
