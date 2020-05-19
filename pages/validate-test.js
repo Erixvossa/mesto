@@ -37,14 +37,21 @@ const setEventListeners = (formElement) => {
     });
 };
   
+
+//Вот с этим вообще хз чо делать и зачем.
 const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
+    const formList = Array.from(document.querySelectorAll('.form'));
     formList.forEach((formElement) => {
-        formElement.addEventListener('submit', function (evt) {
-            evt.preventDefault();
-        });
+      formElement.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+      });
+      const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
+  
+      fieldsetList.forEach((fieldSet) => {
+    setEventListeners(fieldSet);
+  });
     });
-};
+  };
   
 enableValidation();
   
