@@ -8,6 +8,9 @@ const popupSubmitButton = popup.querySelector('.popub__submit-button');
 
 //Находим и обьявляем попап с добавлением элемента
 const popupAdd = document.querySelector('.popup-add');
+const popupAddTitle = popupAdd.querySelector('.popup-add__title');
+const popupAddSubmitButton = popupAdd.querySelector('.popub-add__submit-button');
+
 
 //Находим и обьявляем в popupImg .popup-img
 const popupImg = document.querySelector('.popup-img');
@@ -102,8 +105,6 @@ function popupClickAnywhereClose(evt) {
 };
 
 
-
-
 // Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
 function openClosePopup () {
     if (popup.classList.contains('popup_type_opened')) {
@@ -121,23 +122,73 @@ function openClosePopup () {
     }
 }
 
-// Функция открытия/закрытия попапа c добавлением элемента 
+
+//функция закрытия попапа по нажатию эск аддпопапа
+function escAddClosePopup(evt) {
+    if (evt.key === 'Escape') {
+    console.log('esc');
+    openCloseAddPopup ();
+    }
+}
+
+//функция закрытия попапа по нажатию не на попап адд попапа
+function popupAddClickAnywhereClose(evt) {
+    if (evt.target !== addform && evt.target !== elementTitleInput && evt.target !== elementImageInput && evt.target !== popupAddTitle && evt.target !== popupAddSubmitButton || evt.target === closeAddButton) {
+    console.log('click mimo');
+    openCloseAddPopup (); 
+    }
+};
+
+
+
+// Функция открытия/закрытия попапа c добавлением элемента адд
 function openCloseAddPopup () {
     if (popupAdd.classList.contains('popup-add_type_opened')) {
         popupAdd.classList.remove('popup-add_type_opened');
+        //снятие слушателя событий на закрытие попапаадд кликом мимо
+        document.removeEventListener('click', popupAddClickAnywhereClose);
+        //снятие слушателя событий на закрытие попапаадд кнопкой эск
+        document.removeEventListener('keydown', escAddClosePopup);
     }
     else {
         popupAdd.classList.add('popup-add_type_opened');
+        document.addEventListener('keydown', escAddClosePopup);
+        popupAdd.addEventListener('click', popupAddClickAnywhereClose);
     }
 }
+
+
+
+//функция закрытия попапа по нажатию эск имг попапа
+function escImgClosePopup(evt) {
+    if (evt.key === 'Escape') {
+    console.log('esc');
+    openCloseImgPopup ();
+    }
+}
+
+//функция закрытия попапа по нажатию не на попап имг попапа
+function popupImgClickAnywhereClose(evt) {
+    if (evt.target !== popupImgImage && evt.target !== popupImgTitle || evt.target === closeImgButton) {
+    console.log('click mimo');
+    openCloseImgPopup (); 
+    }
+};
+
 
 // Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
 function openCloseImgPopup () {
     if (popupImg.classList.contains('popup-img_type_opened')) {
         popupImg.classList.remove('popup-img_type_opened');
+        //снятие слушателя событий на закрытие попапаimg кликом мимо
+        document.removeEventListener('click', popupImgClickAnywhereClose);
+        //снятие слушателя событий на закрытие попапаimg кнопкой эск
+        document.removeEventListener('keydown', escImgClosePopup);        
     }
     else {
         popupImg.classList.add('popup-img_type_opened');
+        document.addEventListener('keydown', escImgClosePopup);
+        popupImg.addEventListener('click', popupImgClickAnywhereClose);
     }
 }
 
@@ -229,7 +280,7 @@ popubAddButton.addEventListener('click', openCloseAddPopup);
 //closeButton.addEventListener('click', openClosePopup);
 
 //добавляем слушатель событий на кнопку закрыть попап добавить элемент
-closeAddButton.addEventListener('click', openCloseAddPopup);
+//closeAddButton.addEventListener('click', openCloseAddPopup);
 
 //Добавляем слушатель событий на форму эдит
 editForm.addEventListener('submit', editAuthor);
@@ -238,7 +289,7 @@ editForm.addEventListener('submit', editAuthor);
 addform.addEventListener('submit', addNewElement);
 
 //слушатель событий на закрытие img-попапа
-closeImgButton.addEventListener('click', openCloseImgPopup);
+//closeImgButton.addEventListener('click', openCloseImgPopup);
 
 
 
