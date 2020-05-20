@@ -74,6 +74,7 @@ function toggleButtonState (inputList, buttonElement) {
 
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
+//Это написано в задании
 
 enableValidation({
     formSelector: '.popup__form',
@@ -83,3 +84,25 @@ enableValidation({
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
   });
+
+
+//Как понимаю я?
+//Создаем 2 объекта с настройками для валидации, их надо передавать при открытии окна в некую мастер функцию enableValidation()
+
+const formPopupRules = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popub__submit-button',
+    inactiveButtonClass: 'popub__submit-button_disabled',
+    inputErrorClass: 'popup__error',
+    errorClass: 'popup__error_visible'
+};
+
+const formAddPopupRules = {
+    formSelector: '.popup-add__container',
+    inputSelector: '.popup-add__input',
+    submitButtonSelector: '.popub-add__submit-button',
+    inactiveButtonClass: 'popub-add__submit-button_disabled',
+    inputErrorClass: 'popup-add__error',
+    errorClass: 'popup-add__error_visible'
+};

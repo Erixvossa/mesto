@@ -72,11 +72,35 @@ function toggleButtonState (inputList, buttonElement) {
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
-enableValidation({
-    formSelector: '.popup__form',
+function toggleButtonState (inputList, buttonElement) {
+    if (hasInvalidInput(inputList)) {
+        buttonElement.classList.add('.popup__button_disabled');
+    } else {
+        buttonElement.classList.remove('.popup__button_disabled');
+    }
+};
+
+
+
+const enableValidation = () => {
+
+};
+
+
+const formPopupRules = {
+    formSelector: '.popup__container',
     inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
+    submitButtonSelector: '.popub__submit-button',
+    inactiveButtonClass: 'popub__submit-button_disabled',
+    inputErrorClass: 'popup__error',
     errorClass: 'popup__error_visible'
-  });
+};
+
+const formAddPopupRules = {
+    formSelector: '.popup-add__container',
+    inputSelector: '.popup-add__input',
+    submitButtonSelector: '.popub-add__submit-button',
+    inactiveButtonClass: 'popub-add__submit-button_disabled',
+    inputErrorClass: 'popup-add__error',
+    errorClass: 'popup-add__error_visible'
+};
