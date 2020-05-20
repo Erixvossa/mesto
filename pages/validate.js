@@ -48,7 +48,6 @@ const enableValidation = () => {
 
 
 
-enableValidation();
 
   
 function hasInvalidInput (inputList) {
@@ -106,3 +105,7 @@ const formAddPopupRules = {
     inputErrorClass: 'popup-add__input_type_error',
     errorClass: 'popup-add__error_visible'
 };
+
+
+
+

@@ -113,12 +113,14 @@ function openClosePopup () {
         document.removeEventListener('click', popupClickAnywhereClose);
         //снятие слушателя событий на закрытие попапап кнопкой эск
         document.removeEventListener('keydown', escClosePopup);
+        disableValidation();
     }
     else {
         popup.classList.add('popup_type_opened');
         //слушатель событий на закрытие попапа кнопкой эск
         document.addEventListener('keydown', escClosePopup);
         popup.addEventListener('click', popupClickAnywhereClose);
+        enableValidation();
     }
 }
 
