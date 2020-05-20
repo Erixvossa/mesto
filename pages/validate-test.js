@@ -92,7 +92,7 @@ const formPopupRules = {
     inputSelector: '.popup__input',
     submitButtonSelector: '.popub__submit-button',
     inactiveButtonClass: 'popub__submit-button_disabled',
-    inputErrorClass: 'popup__error',
+    inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 };
 
@@ -101,6 +101,6 @@ const formAddPopupRules = {
     inputSelector: '.popup-add__input',
     submitButtonSelector: '.popub-add__submit-button',
     inactiveButtonClass: 'popub-add__submit-button_disabled',
-    inputErrorClass: 'popup-add__error',
+    inputErrorClass: 'popup-add__input_type_error',
     errorClass: 'popup-add__error_visible'
 };
