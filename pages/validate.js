@@ -5,15 +5,15 @@
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add('.popup__input_type_error');
+    inputElement.classList.add('.popup__input_type_error'); //нужно передать value из объекта в качестве класса
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('.popup__error_visible');
+    errorElement.classList.add('.popup__error_visible'); //нужно передать value из объекта в качестве класса
 };
   
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove('.popup__input_type_error');
-    errorElement.classList.remove('.popup__error_visible');
+    inputElement.classList.remove('.popup__input_type_error'); //нужно передать value из объекта в качестве класса
+    errorElement.classList.remove('.popup__error_visible'); //нужно передать value из объекта в качестве класса
     errorElement.textContent = '';
 };
   
