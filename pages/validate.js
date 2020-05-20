@@ -26,8 +26,8 @@ const checkInputValidity = (formElement, inputElement) => {
 };
   
 const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const buttonElement = formElement.querySelector('.popup__button');
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input')); //вэлью из объекта ключ, inputSelector
+    const buttonElement = formElement.querySelector('.popup__button'); //вэлью из объекта ключ, submitButtonSelector
     toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
@@ -63,12 +63,13 @@ function hasInvalidInput (inputList) {
   
 function toggleButtonState (inputList, buttonElement) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('.popup__button_disabled');
+        buttonElement.classList.add('.popup__button_disabled'); //вэлью из объекта ключ, inactiveButtonClass
     } else {
-        buttonElement.classList.remove('.popup__button_disabled');
+        buttonElement.classList.remove('.popup__button_disabled'); //вэлью из объекта ключ, inactiveButtonClass
     }
 }
-
+//почему ссылается на переменную из другой функции? область видимости же закрытая, насколько понимаю? (30 строка)
+//по логике эта функция должна же еще передавать в кнопку type=disabled?
 
 
 
