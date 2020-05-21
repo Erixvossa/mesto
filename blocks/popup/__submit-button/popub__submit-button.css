@@ -1,12 +1,12 @@
+@import url(./_disabled/popub__submit-button_enabled.css);
+@import url(./_disabled/popub__submit-button_disabled.css);
+
 .popub__submit-button {
     width: calc(100% - 72px);
     margin-left: 36px;
     margin-top: 48px;
     margin-bottom: 43px;
-    background: #000000;
     border-radius: 2px;
-    border-width: inherit;
-    color: #FFFFFF;
     font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;

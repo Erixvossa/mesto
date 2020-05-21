@@ -5,6 +5,7 @@
 @import url(../popup/__submit-button/popub__submit-button.css);
 @import url(./_type/popup_type_closed.css);
 @import url(./_type/popup_type_opened.css);
+@import url(./__error/popup__error.css);
 
 .popup {
     width:100%;
