@@ -2,14 +2,14 @@
 const elementsContainer = document.querySelector('.elements');
 
 //Находим и обьявляем попап с профилем
-const popup = document.querySelector('.popup');
+const popup = document.querySelector('#popup-edit');
 const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
 
 //Находим и обьявляем попап с добавлением элемента
-const popupAdd = document.querySelector('.popup-add');
-const popupAddTitle = popupAdd.querySelector('.popup-add__title');
-const popupAddSubmitButton = popupAdd.querySelector('.popub-add__submit-button');
+const popupAdd = document.querySelector('#popup-add');
+const popupAddTitle = popupAdd.querySelector('.popup__title');
+const popupAddSubmitButton = popupAdd.querySelector('.popub__submit-button');
 
 
 //Находим и обьявляем в popupImg .popup-img
@@ -31,8 +31,8 @@ const closeAddButton = document.querySelector('.popub-add__button-close');
 const closeImgButton = document.querySelector('.popup-img__button-close');
 
 //находим и обьявляем формы попапов
-const editForm = document.querySelector('.popup__container');
-const addform = document.querySelector('.popup-add__container');
+const editForm = document.querySelector('#popup__container');
+const addform = document.querySelector('#popup-add__container');
 
 
 
@@ -41,10 +41,10 @@ const currentName = document.querySelector('.profilee-info__title');
 const currentProfession = document.querySelector('.profilee-info__subtitle');
 
 //находим и обьявляем поля вводов попапов
-const authorNameInput = document.querySelector('.popup__input_type_name');
-const authorProfessionInput = document.querySelector('.popup__input_type_subname');
-const elementTitleInput = document.querySelector('.popup-add__input_type_name');
-const elementImageInput = document.querySelector('.popup-add__input_type_url');
+const authorNameInput = document.querySelector('#popup-name');
+const authorProfessionInput = document.querySelector('#popup-profession');
+const elementTitleInput = document.querySelector('#popup-title');
+const elementImageInput = document.querySelector('#popup-url');
 
 //находим и обьявляем картинку в имг попапе
 const popupImgImage = document.querySelector('.popup-img__image');
@@ -83,6 +83,25 @@ const initialCards = [
 ];
 
 
+//массив всех полей попап
+const formInput = Array.from(document.querySelectorAll('.popup__input'));
+//массив всех спан ошибок попапа
+const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
+
+
+
+//очистка ошибок валидации попапа
+function clearPopupValidationError() {
+    formInput.forEach((input) => {
+        input.classList.remove('popup__input_type_error');
+    })
+    popupSpanError.forEach((span) => {
+        span.classList.remove('popup__error_visible');
+        span.textContent = '';
+    });
+    popupSubmitButton.classList.remove('popub__submit-button_disabled');
+};
+
 
 
 
@@ -113,14 +132,15 @@ function openClosePopup () {
         document.removeEventListener('click', popupClickAnywhereClose);
         //снятие слушателя событий на закрытие попапап кнопкой эск
         document.removeEventListener('keydown', escClosePopup);
-        disableValidation();
+        clearPopupValidationError();
+
     }
     else {
         popup.classList.add('popup_type_opened');
         //слушатель событий на закрытие попапа кнопкой эск
         document.addEventListener('keydown', escClosePopup);
         popup.addEventListener('click', popupClickAnywhereClose);
-        enableValidation();
+        enableValidation(formPopupRules);
     }
 }
 
@@ -145,17 +165,19 @@ function popupAddClickAnywhereClose(evt) {
 
 // Функция открытия/закрытия попапа c добавлением элемента адд
 function openCloseAddPopup () {
-    if (popupAdd.classList.contains('popup-add_type_opened')) {
-        popupAdd.classList.remove('popup-add_type_opened');
+    if (popupAdd.classList.contains('popup_type_opened')) {
+        popupAdd.classList.remove('popup_type_opened');
         //снятие слушателя событий на закрытие попапаадд кликом мимо
         document.removeEventListener('click', popupAddClickAnywhereClose);
         //снятие слушателя событий на закрытие попапаадд кнопкой эск
         document.removeEventListener('keydown', escAddClosePopup);
+        clearPopupValidationError();
     }
     else {
-        popupAdd.classList.add('popup-add_type_opened');
+        popupAdd.classList.add('popup_type_opened');
         document.addEventListener('keydown', escAddClosePopup);
         popupAdd.addEventListener('click', popupAddClickAnywhereClose);
+        enableValidation(formPopupRules);
     }
 }
 

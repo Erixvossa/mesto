@@ -1,6 +1,7 @@
 @import url(./_type/popup__input_type_name.css);
 @import url(./_type/popup__input_type_subname.css);
 @import url(./_type/popup__input_type_error.css);
+@import url(./_type/popup__input_type_url.css);
 
 .popup__input {
     width: calc(100% - 72px);
