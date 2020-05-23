@@ -7,6 +7,7 @@
 @import url(./_type/popup_type_opened.css);
 @import url(./__error/popup__error.css);
 
+
 .popup {
     width:100%;
     min-height:100%;

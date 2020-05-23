@@ -91,15 +91,30 @@ const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
 
 
 //очистка ошибок валидации попапа
-function clearPopupValidationError() {
-    formInput.forEach((input) => {
+//function clearPopupValidationError() {
+//    formInput.forEach((input) => {
+//        input.classList.remove('popup__input_type_error');
+//    })
+//    popupSpanError.forEach((span) => {
+//        span.classList.remove('popup__error_visible');
+//        span.textContent = '';
+//    });
+//    popupSubmitButton.classList.remove('popub__submit-button_disabled');
+//};
+
+function clearPopupValidationError(form) {
+    const formInputLocal = Array.from(form.querySelectorAll('.popup__input'));
+    formInputLocal.forEach((input) => {
         input.classList.remove('popup__input_type_error');
     })
-    popupSpanError.forEach((span) => {
+    const popupSpanErrorLocal = Array.from(form.querySelectorAll('.popup__error'));
+    popupSpanErrorLocal.forEach((span) => {
         span.classList.remove('popup__error_visible');
         span.textContent = '';
     });
-    popupSubmitButton.classList.remove('popub__submit-button_disabled');
+    if (form == editForm) {
+        popupSubmitButton.classList.remove('popub__submit-button_disabled');
+    }
 };
 
 
@@ -107,18 +122,15 @@ function clearPopupValidationError() {
 
 
 //функция закрытия попапа по нажатию эск
-function escClosePopup(evt) {
+function closePopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    console.log('esc');
     openClosePopup ();
     }
 }
 
 //функция закрытия попапа по нажатию не на попап
-function popupClickAnywhereClose(evt) {
+function closePopupClickAnywhere(evt) {
     if (evt.target !== editForm && evt.target !== authorNameInput && evt.target !== authorProfessionInput && evt.target !== popupTitle && evt.target !== popupSubmitButton || evt.target === closeButton) {
-    //console.log('клик мимо');
-    //console.log(!evt.target.closest('.popup'));
     openClosePopup (); 
     }
 };
@@ -129,34 +141,31 @@ function openClosePopup () {
     if (popup.classList.contains('popup_type_opened')) {
         popup.classList.remove('popup_type_opened');
         //снятие слушателя событий на закрытие попапа кликом мимо
-        document.removeEventListener('click', popupClickAnywhereClose);
+        document.removeEventListener('mousedovn', closePopupClickAnywhere);
         //снятие слушателя событий на закрытие попапап кнопкой эск
-        document.removeEventListener('keydown', escClosePopup);
-        clearPopupValidationError();
+        document.removeEventListener('keydown', closePopupEscButton);
+        clearPopupValidationError(editForm);
 
     }
     else {
         popup.classList.add('popup_type_opened');
         //слушатель событий на закрытие попапа кнопкой эск
-        document.addEventListener('keydown', escClosePopup);
-        popup.addEventListener('click', popupClickAnywhereClose);
-        enableValidation(formPopupRules);
+        document.addEventListener('keydown', closePopupEscButton);
+        popup.addEventListener('mousedown', closePopupClickAnywhere);
     }
 }
 
 
 //функция закрытия попапа по нажатию эск аддпопапа
-function escAddClosePopup(evt) {
+function closeAddPopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    console.log('esc');
     openCloseAddPopup ();
     }
 }
 
 //функция закрытия попапа по нажатию не на попап адд попапа
-function popupAddClickAnywhereClose(evt) {
+function closePopupAddClickAnywhere(evt) {
     if (evt.target !== addform && evt.target !== elementTitleInput && evt.target !== elementImageInput && evt.target !== popupAddTitle && evt.target !== popupAddSubmitButton || evt.target === closeAddButton) {
-    console.log('click mimo');
     openCloseAddPopup (); 
     }
 };
@@ -168,33 +177,32 @@ function openCloseAddPopup () {
     if (popupAdd.classList.contains('popup_type_opened')) {
         popupAdd.classList.remove('popup_type_opened');
         //снятие слушателя событий на закрытие попапаадд кликом мимо
-        document.removeEventListener('click', popupAddClickAnywhereClose);
+        document.removeEventListener('mousedown', closePopupAddClickAnywhere);
         //снятие слушателя событий на закрытие попапаадд кнопкой эск
-        document.removeEventListener('keydown', escAddClosePopup);
-        clearPopupValidationError();
+        document.removeEventListener('keydown', closeAddPopupEscButton);
+        popupAddSubmitButton.classList.add('popub__submit-button_disabled');
+        popupAddSubmitButton.setAttribute('disabled', 'true');
+        clearPopupValidationError(addform);
     }
     else {
         popupAdd.classList.add('popup_type_opened');
-        document.addEventListener('keydown', escAddClosePopup);
-        popupAdd.addEventListener('click', popupAddClickAnywhereClose);
-        enableValidation(formPopupRules);
+        document.addEventListener('keydown', closeAddPopupEscButton);
+        popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
     }
 }
 
 
 
 //функция закрытия попапа по нажатию эск имг попапа
-function escImgClosePopup(evt) {
+function closeImgPopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    console.log('esc');
     openCloseImgPopup ();
     }
 }
 
 //функция закрытия попапа по нажатию не на попап имг попапа
-function popupImgClickAnywhereClose(evt) {
+function closeImgPopupClickAnywhere(evt) {
     if (evt.target !== popupImgImage && evt.target !== popupImgTitle || evt.target === closeImgButton) {
-    console.log('click mimo');
     openCloseImgPopup (); 
     }
 };
@@ -205,14 +213,14 @@ function openCloseImgPopup () {
     if (popupImg.classList.contains('popup-img_type_opened')) {
         popupImg.classList.remove('popup-img_type_opened');
         //снятие слушателя событий на закрытие попапаimg кликом мимо
-        document.removeEventListener('click', popupImgClickAnywhereClose);
+        document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
         //снятие слушателя событий на закрытие попапаimg кнопкой эск
-        document.removeEventListener('keydown', escImgClosePopup);        
+        document.removeEventListener('keydown', closeImgPopupEscButton);        
     }
     else {
         popupImg.classList.add('popup-img_type_opened');
-        document.addEventListener('keydown', escImgClosePopup);
-        popupImg.addEventListener('click', popupImgClickAnywhereClose);
+        document.addEventListener('keydown', closeImgPopupEscButton);
+        popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
     }
 }
 
@@ -273,9 +281,9 @@ function editAuthor (evt) {
 
 //функция получения имени и профессии из попапа эдит
 function takeNewAuthor () {
-    openClosePopup();
     authorNameInput.value = currentName.textContent;
     authorProfessionInput.value = currentProfession.textContent;
+    openClosePopup();
 }
 
 //функция добавления элемента на страницу из попапа имг
@@ -285,7 +293,9 @@ function addNewElement (evt) {
     elementsContainer.prepend(newElement);
     elementTitleInput.value = '';
     elementImageInput.value = '';
+
     openCloseAddPopup();
+    popupAddSubmitButton.classList.add('popub__submit-button_disabled');
 }
 
 
@@ -314,10 +324,6 @@ addform.addEventListener('submit', addNewElement);
 
 //слушатель событий на закрытие img-попапа
 //closeImgButton.addEventListener('click', openCloseImgPopup);
-
-
-
-
 
 
 

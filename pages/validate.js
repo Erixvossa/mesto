@@ -15,7 +15,6 @@ const showInputError = (form, formInput, errorMessage, validationRules) => {
     formInput.classList.add(validationRules.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(validationRules.errorClass);
-    console.log(formInput);
   };
   
   
@@ -25,7 +24,6 @@ const hideInputError = (form, formInput, validationRules) => {
     formInput.classList.remove(validationRules.inputErrorClass);
     errorElement.classList.remove(validationRules.errorClass);
     errorElement.textContent = '';
-    console.log(formInput);
 };
   
   
@@ -47,11 +45,14 @@ const hasInvalidInput = (inputList) => {
   
   
 //состояние кнопки
+//здесь и в остальных местах добавил отключение кнопки через атрибут, тк через энтер позволял отправить в обход выключенной кнопки
 const toggleSubmit = (inputList, buttonElement, validationRules) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(validationRules.inactiveButtonClass);
+        buttonElement.setAttribute('disabled', 'true');
     } else {
         buttonElement.classList.remove(validationRules.inactiveButtonClass);
+        buttonElement.removeAttribute('disabled');
     }
 };
   
@@ -75,3 +76,5 @@ const enableValidation = (validationRules) => {
         setEventListeners(form, validationRules);
     });
 };
+
+enableValidation(formPopupRules);
