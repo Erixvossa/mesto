@@ -2,7 +2,7 @@
 const elementsContainer = document.querySelector('.elements');
 
 //Находим и обьявляем попап с профилем
-const popupCommon = document.querySelector()
+const popupCommon = document.querySelector('.popup')
 const popup = document.querySelector('#popup-edit');
 const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
@@ -14,7 +14,7 @@ const popupAddSubmitButton = popupAdd.querySelector('.popub__submit-button');
 
 
 //Находим и обьявляем в popupImg .popup-img
-const popupImg = document.querySelector('.popup-img');
+const popupImg = document.querySelector('#popup-img');
 
 //Находим кнопку эдит автора
 const popubEditButton = document.querySelector('.profilee-info__edit-button');
@@ -125,57 +125,101 @@ function clearPopupValidationError(form) {
 //функция закрытия попапа по нажатию эск
 function closePopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    openClosePopup ();
+    closePopup (popup);
     }
 }
 
 //функция закрытия попапа по нажатию не на попап
 function closePopupClickAnywhere(evt) {
     if (evt.target !== editForm && evt.target !== authorNameInput && evt.target !== authorProfessionInput && evt.target !== popupTitle && evt.target !== popupSubmitButton || evt.target === closeButton) {
-    openClosePopup (); 
+    closePopup (popup); 
     }
 };
 
 
 // Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
-function openClosePopup () {
-    if (popup.classList.contains('popup_type_opened')) {
-        popup.classList.remove('popup_type_opened');
-        //снятие слушателя событий на закрытие попапа кликом мимо
-        document.removeEventListener('mousedovn', closePopupClickAnywhere);
-        //снятие слушателя событий на закрытие попапап кнопкой эск
-        document.removeEventListener('keydown', closePopupEscButton);
-        clearPopupValidationError(editForm);
+// function openClosePopup () {
+//     if (popup.classList.contains('popup_type_opened')) {
+//         popup.classList.remove('popup_type_opened');
+//         //снятие слушателя событий на закрытие попапа кликом мимо
+//         document.removeEventListener('mousedovn', closePopupClickAnywhere);
+//         //снятие слушателя событий на закрытие попапап кнопкой эск
+//         document.removeEventListener('keydown', closePopupEscButton);
+//         clearPopupValidationError(editForm);
 
-    }
-    else {
-        popup.classList.add('popup_type_opened');
-        //слушатель событий на закрытие попапа кнопкой эск
-        document.addEventListener('keydown', closePopupEscButton);
-        popup.addEventListener('mousedown', closePopupClickAnywhere);
-    }
-}
+//     }
+//     else {
+//         popup.classList.add('popup_type_opened');
+//         //слушатель событий на закрытие попапа кнопкой эск
+//         document.addEventListener('keydown', closePopupEscButton);
+//         popup.addEventListener('mousedown', closePopupClickAnywhere);
+//     }
+// }
 
 
 //функция закрытия попапа по нажатию эск аддпопапа
 function closeAddPopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    openCloseAddPopup ();
+    closePopup(popupAdd);
     }
 }
 
 //функция закрытия попапа по нажатию не на попап адд попапа
 function closePopupAddClickAnywhere(evt) {
     if (evt.target !== addform && evt.target !== elementTitleInput && evt.target !== elementImageInput && evt.target !== popupAddTitle && evt.target !== popupAddSubmitButton || evt.target === closeAddButton) {
-    openCloseAddPopup (); 
+    closePopup(popupAdd); 
     }
 };
 
 
 
 // Функция открытия/закрытия попапа c добавлением элемента адд
-function openCloseAddPopup () {
-    if (popupAdd.classList.contains('popup_type_opened')) {
+// function openCloseAddPopup () {
+//     if (popupAdd.classList.contains('popup_type_opened')) {
+//         popupAdd.classList.remove('popup_type_opened');
+//         //снятие слушателя событий на закрытие попапаадд кликом мимо
+//         document.removeEventListener('mousedown', closePopupAddClickAnywhere);
+//         //снятие слушателя событий на закрытие попапаадд кнопкой эск
+//         document.removeEventListener('keydown', closeAddPopupEscButton);
+//         popupAddSubmitButton.classList.add('popub__submit-button_disabled');
+//         popupAddSubmitButton.setAttribute('disabled', 'true');
+//         clearPopupValidationError(addform);
+//     }
+//     else {
+//         popupAdd.classList.add('popup_type_opened');
+//         document.addEventListener('keydown', closeAddPopupEscButton);
+//         popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
+//     }
+// }
+
+function openPopup(elem) {
+    if (elem === popup) {
+        popup.classList.add('popup_type_opened');
+        document.addEventListener('keydown', closePopupEscButton);
+        popup.addEventListener('mousedown', closePopupClickAnywhere);
+    }
+    else if (elem === popupAdd) {
+        popupAdd.classList.add('popup_type_opened');
+        document.addEventListener('keydown', closeAddPopupEscButton);
+        popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
+    }
+    else if (elem === popupImg) {
+        popupImg.classList.add('popup-img_type_opened');
+        document.addEventListener('keydown', closeImgPopupEscButton);
+        popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
+    }
+}
+
+function closePopup(elem) {
+    if (elem === popup) {
+        popup.classList.remove('popup_type_opened');
+        //снятие слушателя событий на закрытие попапа кликом мимо
+        document.removeEventListener('mousedovn', closePopupClickAnywhere);
+        //снятие слушателя событий на закрытие попапап кнопкой эск
+        document.removeEventListener('keydown', closePopupEscButton);
+        clearPopupValidationError(editForm);
+    }
+    else if (elem === popupAdd) {
         popupAdd.classList.remove('popup_type_opened');
         //снятие слушателя событий на закрытие попапаадд кликом мимо
         document.removeEventListener('mousedown', closePopupAddClickAnywhere);
@@ -185,21 +229,13 @@ function openCloseAddPopup () {
         popupAddSubmitButton.setAttribute('disabled', 'true');
         clearPopupValidationError(addform);
     }
-    else {
-        popupAdd.classList.add('popup_type_opened');
-        document.addEventListener('keydown', closeAddPopupEscButton);
-        popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
+    else if (elem === popupImg) {
+        popupImg.classList.remove('popup-img_type_opened');
+        //снятие слушателя событий на закрытие попапаimg кликом мимо
+        document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
+        //снятие слушателя событий на закрытие попапаimg кнопкой эск
+        document.removeEventListener('keydown', closeImgPopupEscButton);
     }
-}
-
-function openPopup() {
-if (popup) {
-
-}
-else {
-
-}
-
 }
 
 
@@ -210,33 +246,33 @@ else {
 //функция закрытия попапа по нажатию эск имг попапа
 function closeImgPopupEscButton(evt) {
     if (evt.key === 'Escape') {
-    openCloseImgPopup ();
+    closePopup (popupImg);
     }
 }
 
 //функция закрытия попапа по нажатию не на попап имг попапа
 function closeImgPopupClickAnywhere(evt) {
     if (evt.target !== popupImgImage && evt.target !== popupImgTitle || evt.target === closeImgButton) {
-    openCloseImgPopup (); 
+    closePopup (popupImg); 
     }
 };
 
 
 // Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
-function openCloseImgPopup () {
-    if (popupImg.classList.contains('popup-img_type_opened')) {
-        popupImg.classList.remove('popup-img_type_opened');
-        //снятие слушателя событий на закрытие попапаimg кликом мимо
-        document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
-        //снятие слушателя событий на закрытие попапаimg кнопкой эск
-        document.removeEventListener('keydown', closeImgPopupEscButton);        
-    }
-    else {
-        popupImg.classList.add('popup-img_type_opened');
-        document.addEventListener('keydown', closeImgPopupEscButton);
-        popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
-    }
-}
+// function openCloseImgPopup () {
+//     if (popupImg.classList.contains('popup-img_type_opened')) {
+//         popupImg.classList.remove('popup-img_type_opened');
+//         //снятие слушателя событий на закрытие попапаimg кликом мимо
+//         document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
+//         //снятие слушателя событий на закрытие попапаimg кнопкой эск
+//         document.removeEventListener('keydown', closeImgPopupEscButton);        
+//     }
+//     else {
+//         popupImg.classList.add('popup-img_type_opened');
+//         document.addEventListener('keydown', closeImgPopupEscButton);
+//         popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
+//     }
+// }
 
 
 
@@ -268,7 +304,7 @@ function createElement (elementTitle, elementLink) {
     //Слушатель событий на создание попапа укрупненного просмотра картинки 
     elementPhotoTemplate.addEventListener('click', function (evt) {
         const currentElement = evt.target;
-        openCloseImgPopup ();
+        openPopup (popupImg);
         popupImgImage.src = elementLink;
         popupImgImage.setAttribute('alt', elementTitle);
         popupImgTitle.textContent = elementTitle;
@@ -289,7 +325,7 @@ function editAuthor (evt) {
     evt.preventDefault();
     currentName.textContent = authorNameInput.value;
     currentProfession.textContent = authorProfessionInput.value;
-    openClosePopup();
+    closePopup(popup);
 }
 
 
@@ -297,7 +333,7 @@ function editAuthor (evt) {
 function takeNewAuthor () {
     authorNameInput.value = currentName.textContent;
     authorProfessionInput.value = currentProfession.textContent;
-    openClosePopup();
+    openPopup(popup);
 }
 
 //функция добавления элемента на страницу из попапа имг
@@ -308,7 +344,7 @@ function addNewElement (evt) {
     elementTitleInput.value = '';
     elementImageInput.value = '';
 
-    openCloseAddPopup();
+    closePopup(popupAdd);
     popupAddSubmitButton.classList.add('popub__submit-button_disabled');
 }
 
@@ -322,7 +358,9 @@ initialCards.forEach(element => {
 popubEditButton.addEventListener('click', takeNewAuthor);
 
 //добавляем слушатель событий на кнопку добавить элемент
-popubAddButton.addEventListener('click', openCloseAddPopup);
+popubAddButton.addEventListener('click', () => {
+    openPopup(popupAdd);
+});
 
 //добавляем слушатель событий на кнопку закрыть попап эдит автор
 //closeButton.addEventListener('click', openClosePopup);
