@@ -2,6 +2,7 @@
 const elementsContainer = document.querySelector('.elements');
 
 //Находим и обьявляем попап с профилем
+const popupCommon = document.querySelector()
 const popup = document.querySelector('#popup-edit');
 const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
@@ -190,6 +191,19 @@ function openCloseAddPopup () {
         popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
     }
 }
+
+function openPopup() {
+if (popup) {
+
+}
+else {
+
+}
+
+}
+
+
+
 
 
 
