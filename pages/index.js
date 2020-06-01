@@ -1,5 +1,6 @@
 //импортируем нужное из модулей:
 import { renderUserAddedCard } from './card.js'
+import { FormValidator } from './validate.js'
 
 
 
