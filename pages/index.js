@@ -1,3 +1,8 @@
+//импортируем нужное из модулей:
+import { renderUserAddedCard } from './card.js'
+
+
+
 //находим и обьявляем, куда будут добавляться элементы
 const elementsContainer = document.querySelector('.elements');
 
@@ -56,32 +61,35 @@ const popupImgTitle = document.querySelector('.popup-img__title');
 
 
 // добавляем названия и адреса изначальных карточек
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+// const initialCards = [
+//     {
+//         name: 'Архыз',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+//     },
+//     {
+//         name: 'Челябинская область',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+//     },
+//     {
+//         name: 'Иваново',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//     },
+//     {
+//         name: 'Камчатка',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+//     },
+//     {
+//         name: 'Холмогорский район',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+//     },
+//     {
+//         name: 'Байкал',
+//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+//     }
+// ];
+
+
+
 
 
 //массив всех полей попап
@@ -339,8 +347,8 @@ function takeNewAuthor () {
 //функция добавления элемента на страницу из попапа имг
 function addNewElement (evt) {
     evt.preventDefault();
-    const newElement = createElement(elementTitleInput.value, elementImageInput.value);
-    elementsContainer.prepend(newElement);
+    renderUserAddedCard(elementTitleInput.value, elementImageInput.value);
+    //elementsContainer.prepend(newElement);
     elementTitleInput.value = '';
     elementImageInput.value = '';
 
@@ -349,9 +357,9 @@ function addNewElement (evt) {
 }
 
 
-initialCards.forEach(element => {
-    elementsContainer.append(createElement(element.name, element.link));
-});
+// initialCards.forEach(element => {
+//     elementsContainer.append(createElement(element.name, element.link));
+// });
 
 
 //добавляем слушатель событий на кнопку эдит автор
