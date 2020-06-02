@@ -1,13 +1,5 @@
 
-//создаем настроечный объект
-const formPopupRules = {
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popub__submit-button',
-    inactiveButtonClass: 'popub__submit-button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-};
+
 
 
 export class FormValidator {
@@ -92,11 +84,3 @@ export class FormValidator {
 
 }
 
-function startValidation(object) {
-    const formList = Array.from(document.querySelectorAll(object.formSelector));
-    formList.forEach((formElement) => {
-    new FormValidator(object, formElement).enableValidation();
-    });
-}
-
-startValidation(formPopupRules);

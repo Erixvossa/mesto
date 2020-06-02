@@ -1,14 +1,26 @@
 //импортируем нужное из модулей:
-import { renderUserAddedCard } from './card.js'
-import { FormValidator } from './validate.js'
+import { renderUserAddedCard } from './card.js';
+import { FormValidator } from './validate.js';
+
+
+//создаем настроечный объект
+const formPopupRules = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popub__submit-button',
+    inactiveButtonClass: 'popub__submit-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+};
+
 
 
 
 //находим и обьявляем, куда будут добавляться элементы
-const elementsContainer = document.querySelector('.elements');
+//const elementsContainer = document.querySelector('.elements');
 
 //Находим и обьявляем попап с профилем
-const popupCommon = document.querySelector('.popup')
+//const popupCommon = document.querySelector('.popup')
 const popup = document.querySelector('#popup-edit');
 const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
@@ -387,5 +399,12 @@ addform.addEventListener('submit', addNewElement);
 //closeImgButton.addEventListener('click', openCloseImgPopup);
 
 
+function startValidation(object) {
+    const formList = Array.from(document.querySelectorAll(object.formSelector));
+    formList.forEach((formElement) => {
+    new FormValidator(object, formElement).enableValidation();
+    });
+}
 
+startValidation(formPopupRules);
 

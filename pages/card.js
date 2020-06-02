@@ -97,8 +97,6 @@ class UserAddedCard extends Card {
 
 
 
-
-
 initialCards.forEach((item) => {
     const card = new DefaultCard(item, '#element');
     const cardElement = card.generateCard();
