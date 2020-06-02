@@ -49,45 +49,44 @@ export class FormValidator {
         }
     };
   
-  
-_hasInvalidInput = (inputList) => {
-    return inputList.some((formInput) => {
-        return !formInput.validity.valid;
-    });
-};
-  
-  
-
-_toggleSubmit = (inputList, buttonElement) => {
-    if (_hasInvalidInput(inputList)) {
-        buttonElement.classList.add(this._inactiveButtonClass);
-        buttonElement.setAttribute('disabled', 'true');
-    } else {
-        buttonElement.classList.remove(this._inactiveButtonClass);
-        buttonElement.removeAttribute('disabled');
-    }
-};
-  
-//добавляем слушатели
-_setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-    const buttonElement = formElement.querySelector(this._submitButtonSelector);
-
-    inputList.forEach((formInput) => {
-        formInput.addEventListener('input', function () {
-        _checkValidity(formInput);
-        _toggleSubmit(inputList, buttonElement);
+    
+    _hasInvalidInput = (inputList) => {
+        return inputList.some((formInput) => {
+            return !formInput.validity.valid;
         });
-    });
-};
+    };
   
-//запускаем валидацию
-enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
-    formList.forEach((form) => {
-        _setEventListeners(formElement);
-    });
-};
+  
+
+    _toggleSubmit = (inputList, buttonElement) => {
+        if (this._hasInvalidInput(inputList)) {
+            buttonElement.classList.add(this._inactiveButtonClass);
+            buttonElement.setAttribute('disabled', 'true');
+        } else {
+            buttonElement.classList.remove(this._inactiveButtonClass);
+            buttonElement.removeAttribute('disabled');
+        }
+    };
+  
+    //добавляем слушатели
+    _setEventListeners = () => {
+        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+
+        //this._toggleSubmit(inputList, buttonElement);
+
+        inputList.forEach((formInput) => {
+            formInput.addEventListener('input', () => {
+            this._checkValidity(formInput);
+            this._toggleSubmit(inputList, buttonElement);
+            });
+        });
+    };
+  
+    //запускаем валидацию
+    enableValidation = () => {
+        this._setEventListeners(this._formElement);
+    };
 
 
 
@@ -96,7 +95,7 @@ enableValidation = () => {
 function startValidation(object) {
     const formList = Array.from(document.querySelectorAll(object.formSelector));
     formList.forEach((formElement) => {
-        new FormValidator(object, formElement).enableValidation();
+    new FormValidator(object, formElement).enableValidation();
     });
 }
 
