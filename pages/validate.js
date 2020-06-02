@@ -53,12 +53,11 @@ export class FormValidator {
 _hasInvalidInput = (inputList) => {
     return inputList.some((formInput) => {
         return !formInput.validity.valid;
-    })
+    });
 };
   
   
-//состояние кнопки
-//здесь и в остальных местах добавил отключение кнопки через атрибут, тк через энтер позволял отправить в обход выключенной кнопки
+
 _toggleSubmit = (inputList, buttonElement) => {
     if (_hasInvalidInput(inputList)) {
         buttonElement.classList.add(this._inactiveButtonClass);
@@ -70,10 +69,10 @@ _toggleSubmit = (inputList, buttonElement) => {
 };
   
 //добавляем слушатели
-_setEventListeners = (form) => {
-    const inputList = Array.from(form.querySelectorAll(this._inputSelector));
-    const buttonElement = form.querySelector(this._submitButtonSelector);
-    //toggleSubmit(inputList, buttonElement, validationRules);
+_setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
+    const buttonElement = formElement.querySelector(this._submitButtonSelector);
+
     inputList.forEach((formInput) => {
         formInput.addEventListener('input', function () {
         _checkValidity(formInput);
@@ -86,7 +85,7 @@ _setEventListeners = (form) => {
 enableValidation = () => {
     const formList = Array.from(document.querySelectorAll(this._formSelector));
     formList.forEach((form) => {
-        _setEventListeners(form);
+        _setEventListeners(formElement);
     });
 };
 
@@ -96,7 +95,7 @@ enableValidation = () => {
 
 function startValidation(object) {
     const formList = Array.from(document.querySelectorAll(object.formSelector));
-    forms.forEach((form) => {
+    formList.forEach((formElement) => {
         new FormValidator(object, formElement).enableValidation();
     });
 }
