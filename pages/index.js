@@ -1,5 +1,5 @@
 //импортируем нужное из модулей:
-import { renderUserAddedCard } from './card.js';
+import { Card } from './card.js';
 import { FormValidator } from './validate.js';
 
 
@@ -16,11 +16,10 @@ const formPopupRules = {
 
 
 
-//находим и обьявляем, куда будут добавляться элементы
-//const elementsContainer = document.querySelector('.elements');
+
 
 //Находим и обьявляем попап с профилем
-//const popupCommon = document.querySelector('.popup')
+
 const popup = document.querySelector('#popup-edit');
 const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
@@ -74,55 +73,39 @@ const popupImgTitle = document.querySelector('.popup-img__title');
 
 
 // добавляем названия и адреса изначальных карточек
-// const initialCards = [
-//     {
-//         name: 'Архыз',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//     },
-//     {
-//         name: 'Челябинская область',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//     },
-//     {
-//         name: 'Иваново',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//     },
-//     {
-//         name: 'Камчатка',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//     },
-//     {
-//         name: 'Холмогорский район',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//     },
-//     {
-//         name: 'Байкал',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//     }
-// ];
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
 
 
 
 
 
-//массив всех полей попап
-const formInput = Array.from(document.querySelectorAll('.popup__input'));
-//массив всех спан ошибок попапа
-const popupSpanError = Array.from(document.querySelectorAll('.popup__error'));
 
 
-
-//очистка ошибок валидации попапа
-//function clearPopupValidationError() {
-//    formInput.forEach((input) => {
-//        input.classList.remove('popup__input_type_error');
-//    })
-//    popupSpanError.forEach((span) => {
-//        span.classList.remove('popup__error_visible');
-//        span.textContent = '';
-//    });
-//    popupSubmitButton.classList.remove('popub__submit-button_disabled');
-//};
 
 function clearPopupValidationError(form) {
     const formInputLocal = Array.from(form.querySelectorAll('.popup__input'));
@@ -134,7 +117,7 @@ function clearPopupValidationError(form) {
         span.classList.remove('popup__error_visible');
         span.textContent = '';
     });
-    if (form == editForm) {
+    if (form === editForm) {
         popupSubmitButton.classList.remove('popub__submit-button_disabled');
     }
 };
@@ -158,24 +141,7 @@ function closePopupClickAnywhere(evt) {
 };
 
 
-// Функция открытия/закрытия попапа в зависимости от наличия класса popup_type_opened
-// function openClosePopup () {
-//     if (popup.classList.contains('popup_type_opened')) {
-//         popup.classList.remove('popup_type_opened');
-//         //снятие слушателя событий на закрытие попапа кликом мимо
-//         document.removeEventListener('mousedovn', closePopupClickAnywhere);
-//         //снятие слушателя событий на закрытие попапап кнопкой эск
-//         document.removeEventListener('keydown', closePopupEscButton);
-//         clearPopupValidationError(editForm);
 
-//     }
-//     else {
-//         popup.classList.add('popup_type_opened');
-//         //слушатель событий на закрытие попапа кнопкой эск
-//         document.addEventListener('keydown', closePopupEscButton);
-//         popup.addEventListener('mousedown', closePopupClickAnywhere);
-//     }
-// }
 
 
 //функция закрытия попапа по нажатию эск аддпопапа
@@ -194,41 +160,14 @@ function closePopupAddClickAnywhere(evt) {
 
 
 
-// Функция открытия/закрытия попапа c добавлением элемента адд
-// function openCloseAddPopup () {
-//     if (popupAdd.classList.contains('popup_type_opened')) {
-//         popupAdd.classList.remove('popup_type_opened');
-//         //снятие слушателя событий на закрытие попапаадд кликом мимо
-//         document.removeEventListener('mousedown', closePopupAddClickAnywhere);
-//         //снятие слушателя событий на закрытие попапаадд кнопкой эск
-//         document.removeEventListener('keydown', closeAddPopupEscButton);
-//         popupAddSubmitButton.classList.add('popub__submit-button_disabled');
-//         popupAddSubmitButton.setAttribute('disabled', 'true');
-//         clearPopupValidationError(addform);
-//     }
-//     else {
-//         popupAdd.classList.add('popup_type_opened');
-//         document.addEventListener('keydown', closeAddPopupEscButton);
-//         popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
-//     }
-// }
+
 
 function openPopup(elem) {
-    if (elem === popup) {
-        popup.classList.add('popup_type_opened');
+ 
+        elem.classList.add('popup_type_opened');
         document.addEventListener('keydown', closePopupEscButton);
-        popup.addEventListener('mousedown', closePopupClickAnywhere);
-    }
-    else if (elem === popupAdd) {
-        popupAdd.classList.add('popup_type_opened');
-        document.addEventListener('keydown', closeAddPopupEscButton);
-        popupAdd.addEventListener('mousedown', closePopupAddClickAnywhere);
-    }
-    else if (elem === popupImg) {
-        popupImg.classList.add('popup-img_type_opened');
-        document.addEventListener('keydown', closeImgPopupEscButton);
-        popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
-    }
+        elem.addEventListener('click', closePopupClickAnywhere);
+
 }
 
 function closePopup(elem) {
@@ -243,7 +182,7 @@ function closePopup(elem) {
     else if (elem === popupAdd) {
         popupAdd.classList.remove('popup_type_opened');
         //снятие слушателя событий на закрытие попапаадд кликом мимо
-        document.removeEventListener('mousedown', closePopupAddClickAnywhere);
+        document.removeEventListener('click', closePopupAddClickAnywhere);
         //снятие слушателя событий на закрытие попапаадд кнопкой эск
         document.removeEventListener('keydown', closeAddPopupEscButton);
         popupAddSubmitButton.classList.add('popub__submit-button_disabled');
@@ -253,7 +192,7 @@ function closePopup(elem) {
     else if (elem === popupImg) {
         popupImg.classList.remove('popup-img_type_opened');
         //снятие слушателя событий на закрытие попапаimg кликом мимо
-        document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
+        document.removeEventListener('click', closeImgPopupClickAnywhere);
         //снятие слушателя событий на закрытие попапаimg кнопкой эск
         document.removeEventListener('keydown', closeImgPopupEscButton);
     }
@@ -279,22 +218,18 @@ function closeImgPopupClickAnywhere(evt) {
 };
 
 
-// Функция открытия/закрытия попапа-img в зависимости от наличия класса popup_type_opened
-// function openCloseImgPopup () {
-//     if (popupImg.classList.contains('popup-img_type_opened')) {
-//         popupImg.classList.remove('popup-img_type_opened');
-//         //снятие слушателя событий на закрытие попапаimg кликом мимо
-//         document.removeEventListener('mousedown', closeImgPopupClickAnywhere);
-//         //снятие слушателя событий на закрытие попапаimg кнопкой эск
-//         document.removeEventListener('keydown', closeImgPopupEscButton);        
-//     }
-//     else {
-//         popupImg.classList.add('popup-img_type_opened');
-//         document.addEventListener('keydown', closeImgPopupEscButton);
-//         popupImg.addEventListener('mousedown', closeImgPopupClickAnywhere);
-//     }
-// }
 
+
+
+// imgPopupHandler()
+
+// elementPhotoTemplate.addEventListener('click', function (evt) {
+//     const currentElement = evt.target;
+//     openPopup (popupImg);
+//     popupImgImage.src = elementLink;
+//     popupImgImage.setAttribute('alt', elementTitle);
+//     popupImgTitle.textContent = elementTitle;
+// });
 
 
 //функция создания элемента, принимает на вход 2 значения (имя и ссылка на картинку)
@@ -357,10 +292,22 @@ function takeNewAuthor () {
     openPopup(popup);
 }
 
+//функция создания новой карточки и добавления ее на страницу
+function renderUserAddedCard(data) {
+    const card = new Card(data, '#element');
+    const cardElement = card.generateCard();
+    document.querySelector('.elements').prepend(cardElement);
+}
+
 //функция добавления элемента на страницу из попапа имг
 function addNewElement (evt) {
     evt.preventDefault();
-    renderUserAddedCard(elementTitleInput.value, elementImageInput.value);
+    const userData = {
+        name: elementTitleInput.value,
+        link: elementImageInput.value
+    };
+
+    renderUserAddedCard(userData);
     //elementsContainer.prepend(newElement);
     elementTitleInput.value = '';
     elementImageInput.value = '';
@@ -370,9 +317,6 @@ function addNewElement (evt) {
 }
 
 
-// initialCards.forEach(element => {
-//     elementsContainer.append(createElement(element.name, element.link));
-// });
 
 
 //добавляем слушатель событий на кнопку эдит автор
@@ -383,11 +327,7 @@ popubAddButton.addEventListener('click', () => {
     openPopup(popupAdd);
 });
 
-//добавляем слушатель событий на кнопку закрыть попап эдит автор
-//closeButton.addEventListener('click', openClosePopup);
 
-//добавляем слушатель событий на кнопку закрыть попап добавить элемент
-//closeAddButton.addEventListener('click', openCloseAddPopup);
 
 //Добавляем слушатель событий на форму эдит
 editForm.addEventListener('submit', editAuthor);
@@ -395,8 +335,17 @@ editForm.addEventListener('submit', editAuthor);
 //Добавляем слушатель событий на форму адд
 addform.addEventListener('submit', addNewElement);
 
-//слушатель событий на закрытие img-попапа
-//closeImgButton.addEventListener('click', openCloseImgPopup);
+
+
+initialCards.forEach((item) => {
+    const card = new Card(item, '#element');
+    const cardElement = card.generateCard();
+  
+    // Добавляем в DOM
+    document.querySelector('.elements').append(cardElement);
+  });
+
+
 
 
 function startValidation(object) {
@@ -408,3 +357,15 @@ function startValidation(object) {
 
 startValidation(formPopupRules);
 
+// function imgPopupHandler() {
+    const elementPhoto = document.querySelector('.elements');
+    elementPhoto.addEventListener('click', (evt) => {
+        //     popupImgImage.src = evt.target.src;
+   //     popupImgImage.setAttribute.alt = evt.target.closest('.element__title').textContent;
+   //     popupImgTitle.textContent = evt.target.closest('.element__title').textContent;
+   console.log(evt.target);
+        openPopup(popupImg);
+        //console.log(evt.target);
+    });
+       
+   // }

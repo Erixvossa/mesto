@@ -15,6 +15,7 @@
   src: url("Inter-Light.woff2?v=3.12") format("woff2"),
        url("Inter-Light.woff?v=3.12") format("woff");
 }
+
 @font-face {
   font-family: 'Inter';
   font-style:  italic;
@@ -37,8 +38,9 @@
 
 @font-face {
   font-family: 'Inter';
-  font-style:  normal;
+  font-style: normal;
   font-weight: 500;
   font-display: swap;
   src: url(../vendor/Inter-Medium.woff2) format("woff2"),
-       url(../vendor/Inter-Medium.woff) format("woff");
+  url(../vendor/Inter-Medium.woff) format("woff");
+}
