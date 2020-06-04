@@ -110,6 +110,14 @@ function clearPopupValidationError(form) {
     if (form === editForm) {
         popupSubmitButton.classList.remove('popub__submit-button_disabled');
     }
+    else if (form === addform) {
+        popupAddSubmitButton.classList.add('popub__submit-button_disabled');
+        popupAddSubmitButton.setAttribute('disabled', 'true');
+        elementTitleInput.value = '';
+        elementImageInput.value = '';
+    }
+
+
 };
 
 function openPopup(elem) {
@@ -118,20 +126,18 @@ function openPopup(elem) {
     elem.addEventListener('click', closePopupClickAnywhere);
 }
 
+
+//фунция закрытия попапа. Подумать, как, а вернее куда убрать ифэлс (за пределы функции закрытия)
 function closePopup(elem) {
     elem.classList.remove('popup_type_opened');
     document.removeEventListener('mousedovn', closePopupClickAnywhere);
     document.removeEventListener('keydown', closePopupEscButton);
-
+    
     if (elem === popup) {
         clearPopupValidationError(editForm);
     }
     else if (elem === popupAdd) {
-        popupAddSubmitButton.classList.add('popub__submit-button_disabled');
-        popupAddSubmitButton.setAttribute('disabled', 'true');
         clearPopupValidationError(addform);
-        elementTitleInput.value = '';
-        elementImageInput.value = '';
     }
 }
 
