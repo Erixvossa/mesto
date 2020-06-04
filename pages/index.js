@@ -23,7 +23,7 @@ const popupAddSubmitButton = popupAdd.querySelector('.popub__submit-button');
 
 
 //Находим и обьявляем в popupImg .popup-img
-const popupImg = document.querySelector('#popup-img');
+export const popupImg = document.querySelector('#popup-img');
 
 //Находим кнопку эдит автора
 const popubEditButton = document.querySelector('.profilee-info__edit-button');
@@ -57,9 +57,9 @@ const elementTitleInput = document.querySelector('#popup-title');
 const elementImageInput = document.querySelector('#popup-url');
 
 //находим и обьявляем картинку в имг попапе
-const popupImgImage = document.querySelector('.popup-img__image');
+export const popupImgImage = document.querySelector('.popup-img__image');
 //находим и обьявляем заголовок в имг попапе
-const popupImgTitle = document.querySelector('.popup-img__title');
+export const popupImgTitle = document.querySelector('.popup-img__title');
 
 
 
@@ -116,11 +116,9 @@ function clearPopupValidationError(form) {
         elementTitleInput.value = '';
         elementImageInput.value = '';
     }
+}
 
-
-};
-
-function openPopup(elem) {
+export function openPopup(elem) {
     elem.classList.add('popup_type_opened');
     document.addEventListener('keydown', closePopupEscButton);
     elem.addEventListener('click', closePopupClickAnywhere);
@@ -132,7 +130,7 @@ function closePopup(elem) {
     elem.classList.remove('popup_type_opened');
     document.removeEventListener('mousedovn', closePopupClickAnywhere);
     document.removeEventListener('keydown', closePopupEscButton);
-    
+
     if (elem === popup) {
         clearPopupValidationError(editForm);
     }
@@ -161,7 +159,7 @@ function closePopupClickAnywhere(evt) {
     else if (evt.target === popupAdd || evt.target === closeAddButton) {
         closePopup(popupAdd);
     }
-};
+}
 
 
 
@@ -252,16 +250,16 @@ function startValidation(object) {
 
 startValidation(formPopupRules);
 
-(function imgPopupHandler() {
-    const elementPhoto = document.querySelector('.elements');
-    elementPhoto.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('element__photo')) {
-            openPopup(popupImg);
-            const tgt = evt.target;
-            popupImgTitle.textContent = tgt.closest('div').querySelector('.element__title').textContent;
-            popupImgImage.src = tgt.closest('div').querySelector('.element__photo').src;
-            popupImgImage.setAttribute.alt = tgt.closest('div').querySelector('.element__title').textContent;
-        }
-    });
-})();
+
+    // const elementPhoto = document.querySelector('.elements');
+    // elementPhoto.addEventListener('click', (evt) => {
+    //     if (evt.target.classList.contains('element__photo')) {
+    //         openPopup(popupImg);
+    //         const tgt = evt.target;
+    //         popupImgTitle.textContent = tgt.closest('div').querySelector('.element__title').textContent;
+    //         popupImgImage.src = tgt.closest('div').querySelector('.element__photo').src;
+    //         popupImgImage.setAttribute.alt = tgt.closest('div').querySelector('.element__title').textContent;
+    //     }
+    // });
+
 
