@@ -118,6 +118,23 @@ function clearPopupValidationError(form) {
     }
 }
 
+function removePopupEventListeners() {
+    document.removeEventListener('mousedovn', closePopupClickAnywhere);
+    document.removeEventListener('keydown', closePopupEscButton);
+}
+
+
+function closePopup(elem) {
+    elem.classList.remove('popup_type_opened');
+    
+    if (elem === popup) {
+        clearPopupValidationError(editForm);
+    }
+    else if (elem === popupAdd) {
+        clearPopupValidationError(addform);
+    }
+}
+
 
 //функция закрытия попапа по нажатию эск
 function closePopupEscButton(evt) {
@@ -125,6 +142,7 @@ function closePopupEscButton(evt) {
     closePopup (popup);
     closePopup(popupAdd);
     closePopup(popupImg);
+    removePopupEventListeners();
     }
 }
 
@@ -132,16 +150,16 @@ function closePopupEscButton(evt) {
 function closePopupClickAnywhere(evt) {
     if (evt.target === popup || evt.target === closeButton) {
         closePopup (popup); 
+        removePopupEventListeners();
     }
     else if (evt.target === popupImg || evt.target === closeImgButton) {
         closePopup(popupImg);
+        removePopupEventListeners();
     }
     else if (evt.target === popupAdd || evt.target === closeAddButton) {
         closePopup(popupAdd);
+        removePopupEventListeners();
     }
-
-
-    
 }
 
 
@@ -154,18 +172,7 @@ export function openPopup(elem) {
 
 
 
-function closePopup(elem) {
-    elem.classList.remove('popup_type_opened');
-    document.removeEventListener('mousedovn', closePopupClickAnywhere);
-    document.removeEventListener('keydown', closePopupEscButton);
 
-    if (elem === popup) {
-        clearPopupValidationError(editForm);
-    }
-    else if (elem === popupAdd) {
-        clearPopupValidationError(addform);
-    }
-}
 
 
 
