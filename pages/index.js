@@ -13,20 +13,12 @@ const formPopupRules = {
     errorClass: 'popup__error_visible'
 };
 
-
-
-
-
-
 //Находим и обьявляем попап с профилем
-
 const popup = document.querySelector('#popup-edit');
-const popupTitle = popup.querySelector('.popup__title');
 const popupSubmitButton = popup.querySelector('.popub__submit-button');
 
 //Находим и обьявляем попап с добавлением элемента
 const popupAdd = document.querySelector('#popup-add');
-const popupAddTitle = popupAdd.querySelector('.popup__title');
 const popupAddSubmitButton = popupAdd.querySelector('.popub__submit-button');
 
 
@@ -43,7 +35,7 @@ const popubAddButton = document.querySelector('.profile__add-button');
 const closeButton = document.querySelector('.popub__button-close');
 
 // находим и обьявляем кнопку закрытия попапа с добавлением
-const closeAddButton = document.querySelector('.popub-add__button-close');
+const closeAddButton = document.querySelector('#popub-add__button-close');
 
 // находим и обьявляем кнопку закрытия попапа-img
 const closeImgButton = document.querySelector('.popup-img__button-close');
@@ -105,15 +97,13 @@ const initialCards = [
 
 
 
-
-
 function clearPopupValidationError(form) {
-    const formInputLocal = Array.from(form.querySelectorAll('.popup__input'));
-    formInputLocal.forEach((input) => {
+    const formInputsLocal = Array.from(form.querySelectorAll('.popup__input'));
+    formInputsLocal.forEach((input) => {
         input.classList.remove('popup__input_type_error');
-    })
-    const popupSpanErrorLocal = Array.from(form.querySelectorAll('.popup__error'));
-    popupSpanErrorLocal.forEach((span) => {
+    });
+    const popupSpanErrorsLocal = Array.from(form.querySelectorAll('.popup__error'));
+    popupSpanErrorsLocal.forEach((span) => {
         span.classList.remove('popup__error_visible');
         span.textContent = '';
     });
@@ -122,21 +112,48 @@ function clearPopupValidationError(form) {
     }
 };
 
+function openPopup(elem) {
+    elem.classList.add('popup_type_opened');
+    document.addEventListener('keydown', closePopupEscButton);
+    elem.addEventListener('click', closePopupClickAnywhere);
+}
 
+function closePopup(elem) {
+    elem.classList.remove('popup_type_opened');
+    document.removeEventListener('mousedovn', closePopupClickAnywhere);
+    document.removeEventListener('keydown', closePopupEscButton);
 
-
+    if (elem === popup) {
+        clearPopupValidationError(editForm);
+    }
+    else if (elem === popupAdd) {
+        popupAddSubmitButton.classList.add('popub__submit-button_disabled');
+        popupAddSubmitButton.setAttribute('disabled', 'true');
+        clearPopupValidationError(addform);
+        elementTitleInput.value = '';
+        elementImageInput.value = '';
+    }
+}
 
 //функция закрытия попапа по нажатию эск
 function closePopupEscButton(evt) {
     if (evt.key === 'Escape') {
     closePopup (popup);
+    closePopup(popupAdd);
+    closePopup(popupImg);
     }
 }
 
 //функция закрытия попапа по нажатию не на попап
 function closePopupClickAnywhere(evt) {
-    if (evt.target !== editForm && evt.target !== authorNameInput && evt.target !== authorProfessionInput && evt.target !== popupTitle && evt.target !== popupSubmitButton || evt.target === closeButton) {
-    closePopup (popup); 
+    if (evt.target === popup || evt.target === closeButton) {
+        closePopup (popup); 
+    }
+    else if (evt.target === popupImg || evt.target === closeImgButton) {
+        closePopup(popupImg);
+    }
+    else if (evt.target === popupAdd || evt.target === closeAddButton) {
+        closePopup(popupAdd);
     }
 };
 
@@ -144,135 +161,7 @@ function closePopupClickAnywhere(evt) {
 
 
 
-//функция закрытия попапа по нажатию эск аддпопапа
-function closeAddPopupEscButton(evt) {
-    if (evt.key === 'Escape') {
-    closePopup(popupAdd);
-    }
-}
 
-//функция закрытия попапа по нажатию не на попап адд попапа
-function closePopupAddClickAnywhere(evt) {
-    if (evt.target !== addform && evt.target !== elementTitleInput && evt.target !== elementImageInput && evt.target !== popupAddTitle && evt.target !== popupAddSubmitButton || evt.target === closeAddButton) {
-    closePopup(popupAdd); 
-    }
-};
-
-
-
-
-
-function openPopup(elem) {
- 
-        elem.classList.add('popup_type_opened');
-        document.addEventListener('keydown', closePopupEscButton);
-        elem.addEventListener('click', closePopupClickAnywhere);
-
-}
-
-function closePopup(elem) {
-    if (elem === popup) {
-        popup.classList.remove('popup_type_opened');
-        //снятие слушателя событий на закрытие попапа кликом мимо
-        document.removeEventListener('mousedovn', closePopupClickAnywhere);
-        //снятие слушателя событий на закрытие попапап кнопкой эск
-        document.removeEventListener('keydown', closePopupEscButton);
-        clearPopupValidationError(editForm);
-    }
-    else if (elem === popupAdd) {
-        popupAdd.classList.remove('popup_type_opened');
-        //снятие слушателя событий на закрытие попапаадд кликом мимо
-        document.removeEventListener('click', closePopupAddClickAnywhere);
-        //снятие слушателя событий на закрытие попапаадд кнопкой эск
-        document.removeEventListener('keydown', closeAddPopupEscButton);
-        popupAddSubmitButton.classList.add('popub__submit-button_disabled');
-        popupAddSubmitButton.setAttribute('disabled', 'true');
-        clearPopupValidationError(addform);
-    }
-    else if (elem === popupImg) {
-        popupImg.classList.remove('popup-img_type_opened');
-        //снятие слушателя событий на закрытие попапаimg кликом мимо
-        document.removeEventListener('click', closeImgPopupClickAnywhere);
-        //снятие слушателя событий на закрытие попапаimg кнопкой эск
-        document.removeEventListener('keydown', closeImgPopupEscButton);
-    }
-}
-
-
-
-
-
-
-//функция закрытия попапа по нажатию эск имг попапа
-function closeImgPopupEscButton(evt) {
-    if (evt.key === 'Escape') {
-    closePopup (popupImg);
-    }
-}
-
-//функция закрытия попапа по нажатию не на попап имг попапа
-function closeImgPopupClickAnywhere(evt) {
-    if (evt.target !== popupImgImage && evt.target !== popupImgTitle || evt.target === closeImgButton) {
-    closePopup (popupImg); 
-    }
-};
-
-
-
-
-
-// imgPopupHandler()
-
-// elementPhotoTemplate.addEventListener('click', function (evt) {
-//     const currentElement = evt.target;
-//     openPopup (popupImg);
-//     popupImgImage.src = elementLink;
-//     popupImgImage.setAttribute('alt', elementTitle);
-//     popupImgTitle.textContent = elementTitle;
-// });
-
-
-//функция создания элемента, принимает на вход 2 значения (имя и ссылка на картинку)
-function createElement (elementTitle, elementLink) {
-    const elementTemplate = document.querySelector('#element').content;
-    const elementShow = elementTemplate.cloneNode(true);
-    const elementTitleTemplate = elementShow.querySelector('.element__title');
-    const elementPhotoTemplate = elementShow.querySelector('.element__photo');
-    //находим кнопку like
-    const likeButton = elementShow.querySelector('.element__like');
-    //находим кнопку recycle
-    const recycleButton = elementShow.querySelector('.element__recycle');
-    //находим ближайшую карточку element к кнопке recycle
-    const currentElementRecycle = recycleButton.closest('.element');
-
-    elementTitleTemplate.textContent = elementTitle;
-    elementPhotoTemplate.src = elementLink;
-    elementPhotoTemplate.setAttribute('alt', elementTitle);
-
-    likeButton.addEventListener('click', function (evt) {
-        // в переменной eventTarget окажется элемент
-        // button, на который мы кликнули
-    
-        const eventTarget = evt.target;
-        eventTarget.classList.toggle('element__like_set');
-    });
-
-    //Слушатель событий на создание попапа укрупненного просмотра картинки 
-    elementPhotoTemplate.addEventListener('click', function (evt) {
-        const currentElement = evt.target;
-        openPopup (popupImg);
-        popupImgImage.src = elementLink;
-        popupImgImage.setAttribute('alt', elementTitle);
-        popupImgTitle.textContent = elementTitle;
-    });
-
-    //создаем слушатель событий на кнопку recycleButton, который будет удалять currentElementRecycle
-    recycleButton.addEventListener('click', function (evt) {
-        const currentElement = evt.target;
-        currentElementRecycle.remove();
-    })
-    return elementShow;
-}
 
 
 
@@ -349,23 +238,24 @@ initialCards.forEach((item) => {
 
 
 function startValidation(object) {
-    const formList = Array.from(document.querySelectorAll(object.formSelector));
-    formList.forEach((formElement) => {
+    const formsList = Array.from(document.querySelectorAll(object.formSelector));
+    formsList.forEach((formElement) => {
     new FormValidator(object, formElement).enableValidation();
     });
 }
 
 startValidation(formPopupRules);
 
-// function imgPopupHandler() {
+(function imgPopupHandler() {
     const elementPhoto = document.querySelector('.elements');
     elementPhoto.addEventListener('click', (evt) => {
-        //     popupImgImage.src = evt.target.src;
-   //     popupImgImage.setAttribute.alt = evt.target.closest('.element__title').textContent;
-   //     popupImgTitle.textContent = evt.target.closest('.element__title').textContent;
-   console.log(evt.target);
-        openPopup(popupImg);
-        //console.log(evt.target);
+        if (evt.target.classList.contains('element__photo')) {
+            openPopup(popupImg);
+            const tgt = evt.target;
+            popupImgTitle.textContent = tgt.closest('div').querySelector('.element__title').textContent;
+            popupImgImage.src = tgt.closest('div').querySelector('.element__photo').src;
+            popupImgImage.setAttribute.alt = tgt.closest('div').querySelector('.element__title').textContent;
+        }
     });
-       
-   // }
+})();
+
