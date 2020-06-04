@@ -118,26 +118,6 @@ function clearPopupValidationError(form) {
     }
 }
 
-export function openPopup(elem) {
-    elem.classList.add('popup_type_opened');
-    document.addEventListener('keydown', closePopupEscButton);
-    elem.addEventListener('click', closePopupClickAnywhere);
-}
-
-
-//фунция закрытия попапа. Подумать, как, а вернее куда убрать ифэлс (за пределы функции закрытия)
-function closePopup(elem) {
-    elem.classList.remove('popup_type_opened');
-    document.removeEventListener('mousedovn', closePopupClickAnywhere);
-    document.removeEventListener('keydown', closePopupEscButton);
-
-    if (elem === popup) {
-        clearPopupValidationError(editForm);
-    }
-    else if (elem === popupAdd) {
-        clearPopupValidationError(addform);
-    }
-}
 
 //функция закрытия попапа по нажатию эск
 function closePopupEscButton(evt) {
@@ -159,7 +139,34 @@ function closePopupClickAnywhere(evt) {
     else if (evt.target === popupAdd || evt.target === closeAddButton) {
         closePopup(popupAdd);
     }
+
+
+    
 }
+
+
+
+export function openPopup(elem) {
+    elem.classList.add('popup_type_opened');
+    document.addEventListener('keydown', closePopupEscButton);
+    elem.addEventListener('click', closePopupClickAnywhere);
+}
+
+
+
+function closePopup(elem) {
+    elem.classList.remove('popup_type_opened');
+    document.removeEventListener('mousedovn', closePopupClickAnywhere);
+    document.removeEventListener('keydown', closePopupEscButton);
+
+    if (elem === popup) {
+        clearPopupValidationError(editForm);
+    }
+    else if (elem === popupAdd) {
+        clearPopupValidationError(addform);
+    }
+}
+
 
 
 
