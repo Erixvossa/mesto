@@ -1,0 +1,31 @@
+{
+  "name": "yandex.praktikum.mesto",
+  "version": "0.0.1",
+  "description": "Learning platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erixvossa/mesto.git"
+  },
+  "author": "Alex Slomyanovskiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erixvossa/mesto/issues"
+  },
+  "homepage": "https://github.com/Erixvossa/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "corejs": "^1.0.0"
+  }
+}
