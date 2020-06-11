@@ -15,12 +15,12 @@ export class FormValidator {
 
 
 //показываем ошибку по id
-_showInputError = (formInput, errorMessage) => {
-    const errorElement = this._formElement.querySelector(`#${formInput.id}-error`);
-    formInput.classList.add(this._inputErrorClass);
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._errorClass);
-};
+    _showInputError = (formInput, errorMessage) => {
+        const errorElement = this._formElement.querySelector(`#${formInput.id}-error`);
+        formInput.classList.add(this._inputErrorClass);
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add(this._errorClass);
+    };
   
   
 //удаляем ошибку
