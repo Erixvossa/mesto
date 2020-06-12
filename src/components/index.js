@@ -1,7 +1,7 @@
 //импортируем нужное из модулей:
-import { Card } from './pages/card.js';
-import { FormValidator } from './pages/validate.js';
-import './pages/index.css'; // добавьте импорт главного файла стилей
+import { Card } from './Card.js';
+import { FormValidator } from './Validate.js';
+import '../pages/index.css'; // добавьте импорт главного файла стилей
 
 
 
