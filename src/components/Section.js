@@ -16,4 +16,9 @@ export class Section {
         this._container.append(element);
     }
 
+
+    addItemOnTop(element) {
+        this._container.prepend(element);
+    }
+
 }
