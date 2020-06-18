@@ -1,6 +1,6 @@
 import { Popup } from './Popup.js';
 import { editForm, addForm } from '../utils/constants.js';
-import { clearPopupValidationError } from './index.js';
+import { clearPopupValidationError } from '../pages/index.js';
 
 export class PopupWithForm extends Popup {
     constructor({ submitFormHandler }, popupSelector) {

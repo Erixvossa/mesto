@@ -1,11 +1,11 @@
 //импортируем нужное из модулей:
-import { Card } from './Card.js';
-import { FormValidator } from './Validate.js';
-import '../pages/index.css'; // добавьте импорт главного файла стилей
-import { PopupWithForm } from './PopupWithForm.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { Section } from './Section.js';
-import { UserInfo } from './UserInfo.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/Validate.js';
+import './index.css'; // добавьте импорт главного файла стилей
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 import { templateElement, targetElements, initialCards, formPopupRules, elementImageInput, elementTitleInput, currentName, currentProfession, editForm, addForm, popubAddButton, popubEditButton, popupImg, popupAdd, popupAddSubmitButton, popup, popupSubmitButton, authorProfessionInput, authorNameInput } from '../utils/constants.js';
 
 

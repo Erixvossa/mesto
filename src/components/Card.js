@@ -2,8 +2,7 @@
 export class Card {
     constructor({ data, handleCardClick }, cardSelector) {
         this._cardSelector = cardSelector;
-        this._name = data.name;
-        this._link = data.link;
+        this._data = data;
         this._handleCardClick = handleCardClick;
     }
 
@@ -52,9 +51,9 @@ export class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        this._element.querySelector('.element__title').textContent = this._name;
-        this._element.querySelector('.element__photo').src = this._link;
-        this._element.querySelector('.element__photo').alt = this._name;
+        this._element.querySelector('.element__title').textContent = this._data.name;
+        this._element.querySelector('.element__photo').src = this._data.link;
+        this._element.querySelector('.element__photo').alt = this._data.name;
         
         this._setEventListeners();
 
