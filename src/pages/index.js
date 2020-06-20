@@ -9,30 +9,32 @@ import { UserInfo } from '../components/UserInfo.js';
 import { templateElement, targetElements, initialCards, formPopupRules, elementImageInput, elementTitleInput, currentName, currentProfession, editForm, addForm, popubAddButton, popubEditButton, popupImg, popupAdd, popupAddSubmitButton, popup, popupSubmitButton, authorProfessionInput, authorNameInput } from '../utils/constants.js';
 
 
+const profileFormValidator = new FormValidator(formPopupRules, editForm);
+const addFormValidator = new FormValidator(formPopupRules, addForm);
 
 
 //функция очистки ошибок формы
-export function clearPopupValidationError(form) {
-  const formInputsLocal = Array.from(form.querySelectorAll('.popup__input'));
-  formInputsLocal.forEach((input) => {
-    input.classList.remove('popup__input_type_error');
-  });
-  const popupSpanErrorsLocal = Array.from(form.querySelectorAll('.popup__error'));
-  popupSpanErrorsLocal.forEach((span) => {
-    span.classList.remove('popup__error_visible');
-    span.textContent = '';
-  });
-    if (form === editForm) {
-      popupSubmitButton.classList.remove('popub__submit-button_disabled');
-    }
-    else if (form === addForm) {
-      popupAddSubmitButton.classList.add('popub__submit-button_disabled');
-      popupAddSubmitButton.setAttribute('disabled', 'true');
-      elementTitleInput.value = '';
-      elementImageInput.value = '';
-    }
-  console.log('3');
-}
+// export function clearPopupValidationError(form) {
+//   const formInputsLocal = Array.from(form.querySelectorAll('.popup__input'));
+//   formInputsLocal.forEach((input) => {
+//     input.classList.remove('popup__input_type_error');
+//   });
+//   const popupSpanErrorsLocal = Array.from(form.querySelectorAll('.popup__error'));
+//   popupSpanErrorsLocal.forEach((span) => {
+//     span.classList.remove('popup__error_visible');
+//     span.textContent = '';
+//   });
+//     if (form === editForm) {
+//       popupSubmitButton.classList.remove('popub__submit-button_disabled');
+//     }
+//     else if (form === addForm) {
+//       popupAddSubmitButton.classList.add('popub__submit-button_disabled');
+//       popupAddSubmitButton.setAttribute('disabled', 'true');
+//       elementTitleInput.value = '';
+//       elementImageInput.value = '';
+//     }
+//   console.log('3');
+// }
 
 //экземпляр класса для использования метода
 const popupWithImage = new PopupWithImage(popupImg);
@@ -60,7 +62,7 @@ const popupWithFormAdd = new PopupWithForm({
     cardList.addItemOnTop(cardElement);
     popupWithFormAdd.popupClose();
   }
-}, popupAdd);
+}, popupAdd, addFormValidator);
  
  
 //класс создания карточки
@@ -125,7 +127,7 @@ const changeAuthorForm = new PopupWithForm ({
     console.log('2');
     changeAuthorForm.popupClose();
   }
-}, popup);
+}, popup, profileFormValidator);
  
 //класс формы добавления фото
 // const openFormAddPhoto = function() {
@@ -156,15 +158,17 @@ popubAddButton.addEventListener('click', () => popupWithFormAdd.popupOpen());
 
 
 //функция запуска валидации
-function startValidation(object) {
-  const formsList = Array.from(document.querySelectorAll(object.formSelector));
-  formsList.forEach((formElement) => {
-  new FormValidator(object, formElement).enableValidation();
-  });
-}
+// function startValidation(object) {
+//   const formsList = Array.from(document.querySelectorAll(object.formSelector));
+//   formsList.forEach((formElement) => {
+//   new FormValidator(object, formElement).enableValidation();
+//   });
+// }
 
-//запускаем валидацию с настроечным объектом
-startValidation(formPopupRules);
+// //запускаем валидацию с настроечным объектом
+// startValidation(formPopupRules);
 
 
+addFormValidator.enableValidation();
 
+profileFormValidator.enableValidation();

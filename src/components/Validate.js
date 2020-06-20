@@ -78,15 +78,21 @@ export class FormValidator {
 
 
     clearPopupValidationError() {
-        const formInputsLocal = Array.from(form.querySelectorAll(this._inputSelector));
+        const formInputsLocal = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         formInputsLocal.forEach((input) => {
           input.classList.remove(this._inputErrorClass);
         });
-        const popupSpanErrorsLocal = Array.from(form.querySelectorAll('.popup__error'));
+        const popupSpanErrorsLocal = Array.from(this._formElement.querySelectorAll('.popup__error'));
         popupSpanErrorsLocal.forEach((span) => {
           span.classList.remove(this._errorClass);
           span.textContent = '';
         });
+        
+        // const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        // const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+        // this._toggleSubmit(inputList, buttonElement);
+        
+        console.log('validation');
     }
 
 
