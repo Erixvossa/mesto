@@ -1,4 +1,4 @@
-import { authorNameInput, authorProfessionInput } from '../utils/constants';
+
 
 export class UserInfo {
     constructor({authorNameSelector, authorJobSelector}) {
