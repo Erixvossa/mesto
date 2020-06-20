@@ -28,7 +28,7 @@ export class Card {
         });
 
         this._element.querySelector('.element__photo').addEventListener('click', () => {
-            this._handleCardClick();
+            this._handleCardClick(this._data);
         });
     }
 

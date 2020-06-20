@@ -34,71 +34,102 @@ export function clearPopupValidationError(form) {
   console.log('3');
 }
 
+//экземпляр класса для использования метода
+const popupWithImage = new PopupWithImage(popupImg);
 
  
 //класс добавления карточки
 const popupWithFormAdd = new PopupWithForm({
-  submitFormHandler: (evt) => {
-    evt.preventDefault();
+  submitFormHandler: (data) => {
+    //evt.preventDefault();
     const item = {
-      name: elementTitleInput.value,
-      link: elementImageInput.value
+      name: popupWithFormAdd.getInputValues().name,
+      link: popupWithFormAdd.getInputValues().url
     };
     const card = new Card({
       data: item,
-      handleCardClick: () => {
-        new PopupWithImage(popupImg).popupOpen(item);
+      handleCardClick: (item) => {
+        popupWithImage.popupOpen(item);
       }
     }, templateElement);
     const cardElement = card.generateCard();
-    CardList.addItemOnTop(cardElement);
-    closeFormAddPhoto();
+    cardList.addItemOnTop(cardElement);
+    popupWithFormAdd.popupClose();
   }
 }, popupAdd);
  
  
 //класс создания карточки
-const CardList = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
+    createCard(item);
     const card = new Card({
       data: item,
-      handleCardClick: () => {
-        new PopupWithImage(popupImg).popupOpen(item);
+      handleCardClick: (item) => {
+        popupWithImage.popupOpen(item);
       }
     }, templateElement);
     const cardElement = card.generateCard();
-    CardList.addItem(cardElement);
+    cardList.addItem(cardElement);
   }
 }, targetElements);
 
 
+
+
+
+//Функция создания карточки
+const createCard = (data) => {
+  return new Card({
+    data: data,
+    handleCardClick: (cardData) => {
+      popupWithImage.popupOpen(cardData);
+    }
+  }, templateElement);
+}
+
+
+
+
+
+
 //рендерим изначальные карточки
-CardList.renderItems(initialCards); 
+cardList.renderItems(initialCards); 
  
 //класс изменения автора
 const userInfo = new UserInfo ({
-  name: currentName,
-  job: currentProfession
+  authorNameSelector: currentName,
+  authorJobSelector: currentProfession
 });
- 
+
+//функция получения даты из инпутов для формы
+// function getDataFromAddForm() {
+//   const dataObj = {
+//     name: authorNameInput.value,
+//     job: authorProfessionInput.value
+//   }
+//   return dataObj;
+// }
+
+
 //класс формы редактирования автора
 const changeAuthorForm = new PopupWithForm ({
-  submitFormHandler: (evt) => {
-    evt.preventDefault();
-    userInfo.setUserInfo();
+  submitFormHandler: () => {
+    //evt.preventDefault();
+    userInfo.setUserInfo(changeAuthorForm.getInputValues());
     console.log('2');
-    closeFormAuthor();
+    changeAuthorForm.popupClose();
   }
 }, popup);
  
 //класс формы добавления фото
-const openFormAddPhoto = function() {
-  popupWithFormAdd.popupOpen();
-};
-const closeFormAddPhoto = function() {
-  popupWithFormAdd.popupClose();
-};
+// const openFormAddPhoto = function() {
+//   popupWithFormAdd.popupOpen();
+// };
+// const closeFormAddPhoto = function() {
+//   popupWithFormAdd.popupClose();
+// };
  
 
  
@@ -107,17 +138,17 @@ const openFormAuthor = function() {
   console.log('1');
   const infoUser = userInfo.getUserInfo();
   authorNameInput.value = infoUser.name;
-  authorProfessionInput.value = infoUser.job;
+  authorProfessionInput.value = infoUser.profession;
   changeAuthorForm.popupOpen();
 };
-const closeFormAuthor = function() {
-  changeAuthorForm.popupClose();
-};
+// const closeFormAuthor = function() {
+//   changeAuthorForm.popupClose();
+// };
  
 
 //добавляем листнеры на кнопки на странице
 popubEditButton.addEventListener('click', openFormAuthor);
-popubAddButton.addEventListener('click', openFormAddPhoto);
+popubAddButton.addEventListener('click', () => popupWithFormAdd.popupOpen());
 
 
 //функция запуска валидации

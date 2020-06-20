@@ -74,6 +74,25 @@ export class FormValidator {
             });
         });
     };
+
+
+
+    clearPopupValidationError() {
+        const formInputsLocal = Array.from(form.querySelectorAll(this._inputSelector));
+        formInputsLocal.forEach((input) => {
+          input.classList.remove(this._inputErrorClass);
+        });
+        const popupSpanErrorsLocal = Array.from(form.querySelectorAll('.popup__error'));
+        popupSpanErrorsLocal.forEach((span) => {
+          span.classList.remove(this._errorClass);
+          span.textContent = '';
+        });
+    }
+
+
+
+
+
   
     //запускаем валидацию
     enableValidation = () => {
