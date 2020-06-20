@@ -16,6 +16,8 @@ export class PopupWithForm extends Popup {
         else if (this._popupSelector.contains(editForm)) {
           clearPopupValidationError(editForm);
         }
+
+
         super.popupClose();
     console.log('4');
     }
@@ -25,7 +27,9 @@ export class PopupWithForm extends Popup {
       this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
         this._submitFormHandler(this.getInputValues());
-  });
+  }, { once: true });
+
+
   
       //  this._popupSelector.querySelector('.popup__container').addEventListener('submit', this._submitFormHandler);
         super._setEventListeners();

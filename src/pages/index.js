@@ -43,16 +43,20 @@ const popupWithFormAdd = new PopupWithForm({
   submitFormHandler: (data) => {
     //evt.preventDefault();
     const item = {
+      // name: elementTitleInput.value, 
+      // link: elementImageInput.value 
+
       name: popupWithFormAdd.getInputValues().name,
       link: popupWithFormAdd.getInputValues().url
     };
-    const card = new Card({
-      data: item,
-      handleCardClick: (item) => {
-        popupWithImage.popupOpen(item);
-      }
-    }, templateElement);
-    const cardElement = card.generateCard();
+    createCard(item);
+    // const card = new Card({
+    //   data: item,
+    //   handleCardClick: (item) => {
+    //     popupWithImage.popupOpen(item);
+    //   }
+    // }, templateElement);
+    const cardElement = createCard(item).generateCard();
     cardList.addItemOnTop(cardElement);
     popupWithFormAdd.popupClose();
   }
@@ -64,13 +68,13 @@ const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
     createCard(item);
-    const card = new Card({
-      data: item,
-      handleCardClick: (item) => {
-        popupWithImage.popupOpen(item);
-      }
-    }, templateElement);
-    const cardElement = card.generateCard();
+    // const card = new Card({
+    //   data: item,
+    //   handleCardClick: (item) => {
+    //     popupWithImage.popupOpen(item);
+    //   }
+    // }, templateElement);
+    const cardElement = createCard(item).generateCard();
     cardList.addItem(cardElement);
   }
 }, targetElements);
@@ -82,7 +86,7 @@ const cardList = new Section({
 //Функция создания карточки
 const createCard = (data) => {
   return new Card({
-    data: data,
+    data,
     handleCardClick: (cardData) => {
       popupWithImage.popupOpen(cardData);
     }
