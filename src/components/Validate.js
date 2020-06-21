@@ -71,9 +71,9 @@ export class FormValidator {
             this._hideInputError(input);
         }
         });
-        if (this._button.id ==='popup-add-button') {
+        // if (this._button.id ==='popup-add-button') {
           this._toggleButtonState(this._inputList, this._button);
-        }
+        // }
     }
     
     enableValidation() {

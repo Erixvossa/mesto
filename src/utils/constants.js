@@ -1,7 +1,7 @@
 //находим и обьявляем картинку в имг попапе
-export const popupImgImage = document.querySelector('.popup-img__image');
+export const popupImgImage = '.popup-img__image';
 //находим и обьявляем заголовок в имг попапе
-export const popupImgTitle = document.querySelector('.popup-img__title');
+export const popupImgTitle = '.popup-img__title';
 
 //создаем настроечный объект
 export const formPopupRules = {

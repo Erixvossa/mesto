@@ -1,9 +1,9 @@
 
 
 export class UserInfo {
-    constructor({authorNameSelector, authorJobSelector}) {
-        this._name = authorNameSelector;
-        this._profession = authorJobSelector;
+    constructor({authorNameElement, authorProfessionElement}) {
+        this._name = authorNameElement;
+        this._profession = authorProfessionElement;
     }
 
 

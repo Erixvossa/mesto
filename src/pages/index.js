@@ -6,7 +6,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
-import { templateElement, targetElements, initialCards, formPopupRules, currentName, currentProfession, editForm, addForm, popubAddButton, popubEditButton, popupImg, popupAdd, popup, authorProfessionInput, authorNameInput } from '../utils/constants.js';
+import { templateElement, targetElements, initialCards, formPopupRules, currentName, currentProfession, editForm, addForm, popubAddButton, popubEditButton, popupImg, popupAdd, popup, authorProfessionInput, authorNameInput, popupImgImage, popupImgTitle } from '../utils/constants.js';
 
 
 const profileFormValidator = new FormValidator(formPopupRules, editForm);
@@ -16,7 +16,7 @@ const addFormValidator = new FormValidator(formPopupRules, addForm);
 
 
 //экземпляр класса для использования метода
-const popupWithImage = new PopupWithImage(popupImg);
+const popupWithImage = new PopupWithImage(popupImg, popupImgImage, popupImgTitle);
 
  
 //класс добавления карточки
@@ -25,24 +25,23 @@ const popupWithFormAdd = new PopupWithForm({
     //evt.preventDefault();
     const item = {
 
-
-      name: popupWithFormAdd.getInputValues().name,
-      link: popupWithFormAdd.getInputValues().url
+      name: data.name,
+      link: data.url
     };
-    createCard(item);
+    // createCard(item);
 
     const cardElement = createCard(item).generateCard();
     cardList.addItemOnTop(cardElement);
     popupWithFormAdd.popupClose();
   }
-}, popupAdd, addFormValidator);
+}, popupAdd, addFormValidator, '.popup__container');
  
  
 //класс создания карточки
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    createCard(item);
+    // createCard(item);
 
     const cardElement = createCard(item).generateCard();
     cardList.addItem(cardElement);
@@ -73,23 +72,23 @@ cardList.renderItems(initialCards);
  
 //класс изменения автора
 const userInfo = new UserInfo ({
-  authorNameSelector: currentName,
-  authorJobSelector: currentProfession
+  authorNameElement: currentName,
+  authorProfessionElement: currentProfession
 });
 
 
 
 //класс формы редактирования автора
 const changeAuthorForm = new PopupWithForm ({
-  submitFormHandler: () => {
+  submitFormHandler: (data) => {
     //evt.preventDefault();
 
-    userInfo.setUserInfo(changeAuthorForm.getInputValues());
+    userInfo.setUserInfo(data);
 
     console.log('2');
     changeAuthorForm.popupClose();
   }
-}, popup, profileFormValidator);
+}, popup, profileFormValidator, '.popup__container');
  
 
 
