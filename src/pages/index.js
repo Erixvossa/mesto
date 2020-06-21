@@ -6,7 +6,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
-import { templateElement, targetElements, initialCards, formPopupRules, currentName, currentProfession, editForm, addForm, popubAddButton, popubEditButton, popupImg, popupAdd, popup, authorProfessionInput, authorNameInput, popupImgImage, popupImgTitle } from '../utils/constants.js';
+import { templateElement, targetElements, initialCards, formPopupRules, currentName, currentProfession, editForm, addForm, popupAddButton, popupEditButton, popupImg, popupAdd, popup, authorProfessionInput, authorNameInput, popupImgImage, popupImgTitle } from '../utils/constants.js';
 
 
 const profileFormValidator = new FormValidator(formPopupRules, editForm);
@@ -65,8 +65,6 @@ const createCard = (data) => {
 
 
 
-
-
 //рендерим изначальные карточки
 cardList.renderItems(initialCards); 
  
@@ -110,8 +108,8 @@ const openFormAuthor = function() {
 
 
 //добавляем листнеры на кнопки на странице
-popubEditButton.addEventListener('click', openFormAuthor);
-popubAddButton.addEventListener('click', () => popupWithFormAdd.popupOpen());
+popupEditButton.addEventListener('click', openFormAuthor);
+popupAddButton.addEventListener('click', () => popupWithFormAdd.popupOpen());
 
 
 

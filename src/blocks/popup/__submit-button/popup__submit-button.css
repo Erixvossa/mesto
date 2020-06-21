@@ -1,7 +1,7 @@
-@import url(./_disabled/popub__submit-button_enabled.css);
-@import url(./_disabled/popub__submit-button_disabled.css);
+@import url(./_disabled/popup__submit-button_enabled.css);
+@import url(./_disabled/popup__submit-button_disabled.css);
 
-.popub__submit-button {
+.popup__submit-button {
     width: calc(100% - 72px);
     margin-left: 36px;
     margin-top: 48px;
@@ -16,7 +16,7 @@
     height: 50px;
 }
 
-.popub__submit-button:hover {
+.popup__submit-button:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, 0.8);
 }

@@ -38,17 +38,6 @@ export class PopupWithForm extends Popup {
   }
 
 
-  // _setEventListeners() {
-  //   this._form.addEventListener('submit', (evt) => {
-  //     evt.preventDefault();
-  //     this._submitFormHandler(this.getInputValues());
-  //   }, { once: true });
-  
-  // //  this._popupId.querySelector('.popup__container').addEventListener('submit', this._submitFormHandler);
-  //   super._setEventListeners();
-  // }
-
-
   getInputValues() {
     this._inputList = this._form.querySelectorAll('.popup__input');
     this._formValues = {};

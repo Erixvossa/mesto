@@ -23,7 +23,7 @@ export class Popup {
     }
 
     _handleClickAnywhereClose(evt) {
-        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popub__button-close') || evt.target.classList.contains('popup-img__button-close')) {
+        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close') || evt.target.classList.contains('popup-img__button-close')) {
             this.popupClose();
         }
     }

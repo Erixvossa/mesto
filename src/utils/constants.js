@@ -7,35 +7,35 @@ export const popupImgTitle = '.popup-img__title';
 export const formPopupRules = {
     formSelector: '.popup__container',
     inputSelector: '.popup__input',
-    submitButtonSelector: '.popub__submit-button',
-    inactiveButtonClass: 'popub__submit-button_disabled',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 };
 
 //Находим и обьявляем попап с профилем
 export const popup = document.querySelector('#popup-edit');
-export const popupSubmitButton = popup.querySelector('.popub__submit-button');
+export const popupSubmitButton = popup.querySelector('.popup__submit-button');
 
 //Находим и обьявляем попап с добавлением элемента
 export const popupAdd = document.querySelector('#popup-add');
-export const popupAddSubmitButton = popupAdd.querySelector('.popub__submit-button');
+export const popupAddSubmitButton = popupAdd.querySelector('.popup__submit-button');
 
 
 //Находим и обьявляем в popupImg .popup-img
 export const popupImg = document.querySelector('#popup-img');
 
 //Находим кнопку эдит автора
-export const popubEditButton = document.querySelector('.profilee-info__edit-button');
+export const popupEditButton = document.querySelector('.profilee-info__edit-button');
 
 //находим кнопку добавить карточку element
-export const popubAddButton = document.querySelector('.profile__add-button');
+export const popupAddButton = document.querySelector('.profile__add-button');
 
 // находим и обьявляем кнопку закрытия попапа
-export const closeButton = document.querySelector('.popub__button-close');
+export const closeButton = document.querySelector('.popup__button-close');
 
 // находим и обьявляем кнопку закрытия попапа с добавлением
-export const closeAddButton = document.querySelector('#popub-add__button-close');
+export const closeAddButton = document.querySelector('#popup-add__button-close');
 
 // находим и обьявляем кнопку закрытия попапа-img
 export const closeImgButton = document.querySelector('.popup-img__button-close');

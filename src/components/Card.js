@@ -40,12 +40,6 @@ export class Card {
         this._element.remove();
     }
 
-    // _handleImgPopupOpener() {
-    //     popupImgTitle.textContent = this._name;
-    //     popupImgImage.src = this._link;
-    //     popupImgImage.setAttribute.alt = this._name;
-    //     openPopup(popupImg);
-    // }
 
 
 
