@@ -1,3 +1,4 @@
 .element__title-like-string {
     display: flex;
+    justify-content: space-between;
 }

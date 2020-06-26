@@ -1,5 +1,6 @@
 @import url(../profile/__avatar/profile__avatar.css);
 @import url(../profile/__add-button/profile__add-button.css);
+@import url(../profile/__avatar-button/profile__avatar-button.css);
 
 .profile {
     display: flex;
