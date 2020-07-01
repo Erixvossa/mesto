@@ -1,43 +1,34 @@
-export class Popup {
-    constructor(popupId) {
-        this._popupId = popupId;
-        this._handleClickAnywhereClose = this._handleClickAnywhereClose.bind(this);
-        this._handleEscClose = this._handleEscClose.bind(this);
+export default class Popup {
+  constructor(popupSelector) {
+    this._popup = document.querySelector(popupSelector);
+    this._setEventListeners();
+    this._handleEscClose = this._handleEscClose.bind(this);
+  }
+
+  _handleEscClose(evt) {
+    if (evt.key === 'Escape') {
+      this.popupClose();
     }
+  }
 
-    popupOpen() {
-        this._popupId.classList.add('popup_type_opened');
-        this._setEventListeners();
+  _handleClickAnywhereClose(evt) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close') || evt.target.classList.contains('popup-img__button-close')) {
+      this.popupClose();
     }
+  }
 
+  _setEventListeners() {
+    this._popup.querySelector('.popup__button-close').addEventListener('click', () => this.close());
+    this._popup.addEventListener('click', (evt) => this._handleClickAnywhereClose(evt));
+  }
 
-    popupClose() {
-        this._popupId.classList.remove('popup_type_opened');
-        this._removeEventListeners();
-    }
+  popupOpen() {
+    document.addEventListener('keydown', this._handleEscClose);
+    this._popup.classList.add('popup_type_opened');
+  }
 
-    _handleEscClose(evt) {
-        if (evt.key === 'Escape') {
-            this.popupClose();
-        }
-    }
-
-    _handleClickAnywhereClose(evt) {
-        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close') || evt.target.classList.contains('popup-img__button-close')) {
-            this.popupClose();
-        }
-    }
-
-
-
-    _removeEventListeners() {
-        document.removeEventListener('keydown', this._handleEscClose);
-        this._popupId.removeEventListener('click', this._handleClickAnywhereClose);
-    }
-
-    _setEventListeners() {
-        this._popupId.addEventListener('click', this._handleClickAnywhereClose);
-        document.addEventListener('keydown', this._handleEscClose);
-    }
-
+  popupClose() {
+    document.removeEventListener('keydown', this._handleEscClose);
+    this._popup.classList.remove('popup_type_opened');
+  }
 }

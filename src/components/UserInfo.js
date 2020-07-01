@@ -1,23 +1,38 @@
 
 
 export class UserInfo {
-    constructor({authorNameElement, authorProfessionElement}) {
-        this._name = authorNameElement;
-        this._profession = authorProfessionElement;
-    }
+  constructor({usernameSelector, descriptionSelector, avatarSelector}) {
+    this._username = document.querySelector(usernameSelector);
+    this._description = document.querySelector(descriptionSelector);
+    this._avatar = document.querySelector(avatarSelector);
+  }
+
+  getUserInfo() {
+    return {
+      username: this._username.textContent,
+      description: this._description.textContent
+    };
+  }
 
 
-    getUserInfo() {
-        const dataObj = {
-            name: this._name.textContent,
-            profession: this._profession.textContent
-        }
-        return dataObj;
+  setUserInfo(name, about) {
+    this._username.textContent = name;
+    this._description.textContent = about;
+  }
 
-    }
 
-    setUserInfo(data) {
-        this._name.textContent = data.name;
-        this._profession.textContent = data.profession;
-    }
+  setUserAvatar(link) {
+    this._avatar.src = link;
+  }
+
+
+  setUserId(id) {
+    this._userId = id;
+  }
+
+
+  getUserId() {
+    return this._userId;
+  }
+
 }
