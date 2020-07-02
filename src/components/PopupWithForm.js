@@ -7,6 +7,7 @@ export class PopupWithForm extends Popup {
     this._validationForm = validationForm;
     this._handleOpen = handleOpen;
     this._submitButton = this._popup.querySelector('.popup__submit-button');
+    this._submitButtonTextContent = this._submitButton.textContent;
   }
 
 
@@ -35,13 +36,7 @@ export class PopupWithForm extends Popup {
 
 
   handleSubmitButtonTextContent() {
-    console.log(this._popup);
-    if (this._popup.classList.contains('popup__add')) {
-      this._submitButton.textContent = 'Создать';
-    }
-    else {
-      this._submitButton.textContent = 'Сохранить';
-    }
+    this._submitButton.textContent = this._submitButtonTextContent;
   }
 
   _getInputValues() {
