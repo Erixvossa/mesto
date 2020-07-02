@@ -67,7 +67,7 @@ const popupWithFormEdit = new PopupWithForm(
         popupWithFormEdit.popupClose();
       })
       .catch(err => console.log(err))
-      .finally(() => popupEditFormSubmitButton.textContent = 'Сохранить');
+      .finally(() => popupWithFormEdit.handleSubmitButtonTextContent());
   },
   profileFormValidator,
   () => {
@@ -88,7 +88,7 @@ const popupWithFormAdd = new PopupWithForm(
         popupWithFormAdd.popupClose();
       })
       .catch(err => console.log(err))
-      .finally(() => popupAddFormSubmitButton.textContent = 'Создать');
+      .finally(() => popupWithFormAdd.handleSubmitButtonTextContent());
   },
   addFormValidator
 );
@@ -116,7 +116,7 @@ const popupWithFormAvatar = new PopupWithForm(
         popupWithFormAvatar.popupClose();
       })
       .catch(err => console.log(err))
-      .finally(() => popupAvatarFormSubmitButton.textContent = 'Сохранить');
+      .finally(() => popupWithFormAvatar.handleSubmitButtonTextContent());
   },
   popupAvatarFormValidator
 );

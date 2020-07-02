@@ -12,13 +12,12 @@ export default class Popup {
   }
 
   _handleClickAnywhereClose(evt) {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close') || evt.target.classList.contains('popup-img__button-close')) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
       this.popupClose();
     }
   }
 
   _setEventListeners() {
-    this._popup.querySelector('.popup__button-close').addEventListener('click', () => this.close());
     this._popup.addEventListener('click', (evt) => this._handleClickAnywhereClose(evt));
   }
 

@@ -34,6 +34,16 @@ export class PopupWithForm extends Popup {
   }
 
 
+  handleSubmitButtonTextContent() {
+    console.log(this._popup);
+    if (this._popup.classList.contains('popup__add')) {
+      this._submitButton.textContent = 'Создать';
+    }
+    else {
+      this._submitButton.textContent = 'Сохранить';
+    }
+  }
+
   _getInputValues() {
     this._inputList = this._form.querySelectorAll('.popup__input');
     this._formValues = {};
